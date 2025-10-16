@@ -8,7 +8,7 @@
         body {
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 25%, #667eea 50%, #764ba2 75%, #f093fb 100%);
             background-attachment: fixed;
             margin: 0;
             padding: 20px;
@@ -31,12 +31,12 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(30, 60, 114, 0.95);
             backdrop-filter: blur(20px);
             border-radius: 25px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.2);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.1);
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
         }
         
         .header {
@@ -84,8 +84,8 @@
         
         .tabs {
             display: flex;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-bottom: 3px solid rgba(102, 126, 234, 0.2);
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            border-bottom: 3px solid rgba(240, 147, 251, 0.4);
             position: relative;
         }
         
@@ -111,7 +111,7 @@
             font-size: 1.2rem;
             font-weight: bold;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            color: #495057;
+            color: #ffffff;
             position: relative;
             overflow: hidden;
         }
@@ -129,7 +129,7 @@
         
         .tab.active {
             background: transparent;
-            color: #667eea;
+            color: #f093fb;
             transform: translateY(-2px);
         }
         
@@ -146,6 +146,8 @@
         .content {
             padding: 30px;
             min-height: 600px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
         }
         
         .page-section {
@@ -157,13 +159,14 @@
         }
         
         .text-box {
-            background: #f8f9fa;
-            border-right: 4px solid #007bff;
+            background: rgba(42, 82, 152, 0.8);
+            border-right: 4px solid #f093fb;
             padding: 20px;
             margin-bottom: 30px;
             border-radius: 8px;
             line-height: 1.8;
             font-size: 1.1rem;
+            color: #ffffff;
         }
         
         .section-title {
@@ -177,16 +180,17 @@
         }
         
         .question-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,249,250,0.9) 100%);
+            background: linear-gradient(135deg, rgba(42, 82, 152, 0.9) 0%, rgba(30, 60, 114, 0.9) 100%);
             backdrop-filter: blur(10px);
-            border: 2px solid rgba(102, 126, 234, 0.1);
+            border: 2px solid rgba(240, 147, 251, 0.3);
             border-radius: 20px;
             padding: 25px;
             margin-bottom: 25px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08), 0 0 0 1px rgba(255,255,255,0.5);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.1);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            color: #ffffff;
         }
         
         .question-card::before {
@@ -214,7 +218,7 @@
         .question {
             font-size: 1.1rem;
             font-weight: bold;
-            color: #2c3e50;
+            color: #ffffff;
             margin-bottom: 15px;
         }
         
@@ -225,16 +229,17 @@
         
         .option {
             padding: 18px 20px;
-            border: 2px solid rgba(102, 126, 234, 0.2);
+            border: 2px solid rgba(240, 147, 251, 0.4);
             border-radius: 15px;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            background: linear-gradient(135deg, rgba(248,249,250,0.8) 0%, rgba(255,255,255,0.8) 100%);
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.6) 0%, rgba(42, 82, 152, 0.6) 100%);
             backdrop-filter: blur(5px);
             position: relative;
             overflow: hidden;
             font-weight: 500;
             margin-bottom: 8px;
+            color: #ffffff;
         }
         
         .option::before {
@@ -249,10 +254,10 @@
         }
         
         .option:hover {
-            border-color: #667eea;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-color: #f093fb;
+            background: linear-gradient(135deg, rgba(240, 147, 251, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
             transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.4);
         }
         
         .option:hover::before {
@@ -497,16 +502,17 @@
         }
         
         .login-form {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(30, 60, 114, 0.95);
             backdrop-filter: blur(20px);
             padding: 50px;
             border-radius: 25px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.3);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.1);
             max-width: 550px;
             width: 100%;
             border: 1px solid rgba(255,255,255,0.2);
             position: relative;
             overflow: hidden;
+            color: #ffffff;
         }
         
         .login-form::before {
@@ -521,7 +527,7 @@
         
         .login-form h2 {
             text-align: center;
-            color: #2c3e50;
+            color: #ffffff;
             margin-bottom: 30px;
             font-size: 1.5rem;
         }
@@ -533,7 +539,7 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            color: #2c3e50;
+            color: #ffffff;
             font-weight: bold;
             font-size: 1.1rem;
         }
@@ -542,13 +548,14 @@
         .form-group select {
             width: 100%;
             padding: 18px 20px;
-            border: 2px solid rgba(102, 126, 234, 0.2);
+            border: 2px solid rgba(240, 147, 251, 0.4);
             border-radius: 15px;
             font-size: 1.1rem;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-sizing: border-box;
-            background: rgba(248, 249, 250, 0.5);
+            background: rgba(42, 82, 152, 0.6);
             backdrop-filter: blur(5px);
+            color: #ffffff;
         }
         
         .form-group input:focus,
@@ -608,14 +615,14 @@
         .welcome-message {
             margin-top: 30px;
             padding: 20px;
-            background: #f8f9fa;
+            background: rgba(42, 82, 152, 0.6);
             border-radius: 10px;
-            border-right: 4px solid #007bff;
+            border-right: 4px solid #f093fb;
         }
         
         .welcome-message p {
             margin: 10px 0;
-            color: #495057;
+            color: #ffffff;
             font-size: 1rem;
         }
         
@@ -1691,5 +1698,5 @@
         
         // تهيئة النظام عند تحميل الصفحة
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98fa8b6dd6e0f9ee',t:'MTc2MDY0OTA0NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98fa984a26acf9ee',t:'MTc2MDY0OTU3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
