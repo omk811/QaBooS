@@ -507,6 +507,19 @@
             background: var(--success-color);
         }
 
+        .progress-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: var(--white-color);
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            font-weight: bold;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+        }
+
         @media (max-width: 768px) {
             .tabs {
                 flex-direction: column;
@@ -532,12 +545,24 @@
             .final-actions {
                 flex-direction: column;
             }
+
+            .progress-indicator {
+                position: relative;
+                bottom: 0;
+                right: 0;
+                margin-top: 20px;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
     <div class="score-display" id="scoreDisplay" style="display: none;">
         النقاط: <span id="score">0</span>
+    </div>
+
+    <div class="progress-indicator" id="progressIndicator" style="display: none;">
+        التقدم: <span id="progress">0</span>%
     </div>
 
     <main class="container">
@@ -549,7 +574,7 @@
             </div>
             <div class="login-form">
                 <h2>مرحباً بك! يرجى إدخال بياناتك</h2>
-                <form id="studentForm" onsubmit="startQuiz(event)">
+                <form id="studentForm">
                     <div class="form-group">
                         <label for="studentName">الاسم الكامل:</label>
                         <input type="text" id="studentName" name="studentName" required placeholder="أدخل اسمك الكامل">
@@ -586,9 +611,9 @@
             </header>
 
             <nav class="tabs">
-                <button class="tab active" onclick="showPage(0)">صفحة 43</button>
-                <button class="tab" onclick="showPage(1)">صفحة 44</button>
-                <button class="tab" onclick="showPage(2)">صفحة 45</button>
+                <button class="tab active" data-page="0">صفحة 43</button>
+                <button class="tab" data-page="1">صفحة 44</button>
+                <button class="tab" data-page="2">صفحة 45</button>
             </nav>
 
             <div class="content">
@@ -607,10 +632,10 @@
                     <div class="question-card">
                         <div class="question">ما معنى كلمة "سلالة"؟</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, false)">أ) المكان الذي ولد فيه</div>
-                            <div class="option" onclick="selectOption(this, true)">ب) النسب والعائلة</div>
-                            <div class="option" onclick="selectOption(this, false)">ج) التاريخ الذي ولد فيه</div>
-                            <div class="option" onclick="selectOption(this, false)">د) المدينة التي عاش فيها</div>
+                            <div class="option" data-correct="false">أ) المكان الذي ولد فيه</div>
+                            <div class="option" data-correct="true">ب) النسب والعائلة</div>
+                            <div class="option" data-correct="false">ج) التاريخ الذي ولد فيه</div>
+                            <div class="option" data-correct="false">د) المدينة التي عاش فيها</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
@@ -618,20 +643,20 @@
                     <div class="question-card">
                         <div class="question">ما معنى كلمة "مبادئ"؟</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, true)">أ) الأسس والقواعد الأولى</div>
-                            <div class="option" onclick="selectOption(this, false)">ب) الكتب المدرسية</div>
-                            <div class="option" onclick="selectOption(this, false)">ج) المعلمون</div>
-                            <div class="option" onclick="selectOption(this, false)">د) الامتحانات</div>
+                            <div class="option" data-correct="true">أ) الأسس والقواعد الأولى</div>
+                            <div class="option" data-correct="false">ب) الكتب المدرسية</div>
+                            <div class="option" data-correct="false">ج) المعلمون</div>
+                            <div class="option" data-correct="false">د) الامتحانات</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
                     <div class="question-card">
                         <div class="question">ما معنى "ضابطاً مرشّحاً"؟</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, false)">أ) ضابط متقاعد</div>
-                            <div class="option" onclick="selectOption(this, true)">ب) طالب ضابط في التدريب</div>
-                            <div class="option" onclick="selectOption(this, false)">ج) ضابط كبير</div>
-                            <div class="option" onclick="selectOption(this, false)">د) قائد عسكري</div>
+                            <div class="option" data-correct="false">أ) ضابط متقاعد</div>
+                            <div class="option" data-correct="true">ب) طالب ضابط في التدريب</div>
+                            <div class="option" data-correct="false">ج) ضابط كبير</div>
+                            <div class="option" data-correct="false">د) قائد عسكري</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
@@ -639,20 +664,20 @@
                     <div class="question-card">
                         <div class="question">ما الفكرة الرئيسية للفقرة الأولى؟</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, false)">أ) تعليم السلطان قابوس</div>
-                            <div class="option" onclick="selectOption(this, true)">ب) ولادة السلطان قابوس ونسبه</div>
-                            <div class="option" onclick="selectOption(this, false)">ج) سفر السلطان قابوس</div>
-                            <div class="option" onclick="selectOption(this, false)">د) حكم السلطان قابوس</div>
+                            <div class="option" data-correct="false">أ) تعليم السلطان قابوس</div>
+                            <div class="option" data-correct="true">ب) ولادة السلطان قابوس ونسبه</div>
+                            <div class="option" data-correct="false">ج) سفر السلطان قابوس</div>
+                            <div class="option" data-correct="false">د) حكم السلطان قابوس</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
                     <div class="question-card">
                         <div class="question">ما الفكرة الرئيسية للفقرة الثانية؟</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, true)">أ) مراحل تعليم السلطان قابوس المختلفة</div>
-                            <div class="option" onclick="selectOption(this, false)">ب) ولادة السلطان قابوس</div>
-                            <div class="option" onclick="selectOption(this, false)">ج) هوايات السلطان قابوس</div>
-                            <div class="option" onclick="selectOption(this, false)">د) وفاة السلطان قابوس</div>
+                            <div class="option" data-correct="true">أ) مراحل تعليم السلطان قابوس المختلفة</div>
+                            <div class="option" data-correct="false">ب) ولادة السلطان قابوس</div>
+                            <div class="option" data-correct="false">ج) هوايات السلطان قابوس</div>
+                            <div class="option" data-correct="false">د) وفاة السلطان قابوس</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
@@ -660,22 +685,22 @@
                     <div class="question-card">
                         <div class="question">ولد السلطان قابوس في مدينة مسقط. (صح/خطأ)</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, false)">صح</div>
-                            <div class="option" onclick="selectOption(this, true)">خطأ</div>
+                            <div class="option" data-correct="false">صح</div>
+                            <div class="option" data-correct="true">خطأ</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
                     <div class="question-card">
                         <div class="question">درس السلطان قابوس في أكاديمية سانت هيرست العسكرية لمدة عامين. (صح/خطأ)</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, true)">صح</div>
-                            <div class="option" onclick="selectOption(this, false)">خطأ</div>
+                            <div class="option" data-correct="true">صح</div>
+                            <div class="option" data-correct="false">خطأ</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
                     <div class="navigation-buttons">
                         <div></div>
-                        <button onclick="showPage(1)" class="nav-button">
+                        <button class="nav-button" data-next-page="1">
                             الصفحة التالية (44) ←
                         </button>
                     </div>
@@ -702,10 +727,10 @@
                     <div class="question-card">
                         <div class="question">ما معنى "المحورية"؟</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, true)">أ) الأساسية والمهمة</div>
-                            <div class="option" onclick="selectOption(this, false)">ب) الدائرية</div>
-                            <div class="option" onclick="selectOption(this, false)">ج) الطويلة</div>
-                            <div class="option" onclick="selectOption(this, false)">د) الصعبة</div>
+                            <div class="option" data-correct="true">أ) الأساسية والمهمة</div>
+                            <div class="option" data-correct="false">ب) الدائرية</div>
+                            <div class="option" data-correct="false">ج) الطويلة</div>
+                            <div class="option" data-correct="false">د) الصعبة</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
@@ -713,10 +738,10 @@
                     <div class="question-card">
                         <div class="question">ما معنى "مداركه"؟</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, false)">أ) أمواله</div>
-                            <div class="option" onclick="selectOption(this, true)">ب) معارفه وفهمه</div>
-                            <div class="option" onclick="selectOption(this, false)">ج) أصدقاؤه</div>
-                            <div class="option" onclick="selectOption(this, false)">د) كتبه</div>
+                            <div class="option" data-correct="false">أ) أمواله</div>
+                            <div class="option" data-correct="true">ب) معارفه وفهمه</div>
+                            <div class="option" data-correct="false">ج) أصدقاؤه</div>
+                            <div class="option" data-correct="false">د) كتبه</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
@@ -724,10 +749,10 @@
                     <div class="question-card">
                         <div class="question">ما معنى "المعاصرة"؟</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, false)">أ) القديم</div>
-                            <div class="option" onclick="selectOption(this, true)">ب) الحداثة ومواكبة العصر</div>
-                            <div class="option" onclick="selectOption(this, false)">ج) التقليد</div>
-                            <div class="option" onclick="selectOption(this, false)">د) الماضي</div>
+                            <div class="option" data-correct="false">أ) القديم</div>
+                            <div class="option" data-correct="true">ب) الحداثة ومواكبة العصر</div>
+                            <div class="option" data-correct="false">ج) التقليد</div>
+                            <div class="option" data-correct="false">د) الماضي</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
@@ -735,10 +760,10 @@
                     <div class="question-card">
                         <div class="question">ما الفكرة الرئيسية للفقرة الثالثة؟</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, false)">أ) تعليم السلطان قابوس</div>
-                            <div class="option" onclick="selectOption(this, true)">ب) تولي السلطان قابوس الحكم</div>
-                            <div class="option" onclick="selectOption(this, false)">ج) سفر السلطان قابوس</div>
-                            <div class="option" onclick="selectOption(this, false)">د) هوايات السلطان قابوس</div>
+                            <div class="option" data-correct="false">أ) تعليم السلطان قابوس</div>
+                            <div class="option" data-correct="true">ب) تولي السلطان قابوس الحكم</div>
+                            <div class="option" data-correct="false">ج) سفر السلطان قابوس</div>
+                            <div class="option" data-correct="false">د) هوايات السلطان قابوس</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
@@ -746,24 +771,24 @@
                     <div class="question-card">
                         <div class="question">استغرقت جولة السلطان قابوس حول العالم ثلاث سنوات. (صح/خطأ)</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, true)">صح</div>
-                            <div class="option" onclick="selectOption(this, false)">خطأ</div>
+                            <div class="option" data-correct="true">صح</div>
+                            <div class="option" data-correct="false">خطأ</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
                     <div class="question-card">
                         <div class="question">تولى السلطان قابوس الحكم في عام ١٩٧٠م. (صح/خطأ)</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, true)">صح</div>
-                            <div class="option" onclick="selectOption(this, false)">خطأ</div>
+                            <div class="option" data-correct="true">صح</div>
+                            <div class="option" data-correct="false">خطأ</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
                     <div class="navigation-buttons">
-                        <button onclick="showPage(0)" class="nav-button">
+                        <button class="nav-button" data-prev-page="0">
                             ← الصفحة السابقة (43)
                         </button>
-                        <button onclick="showPage(2)" class="nav-button">
+                        <button class="nav-button" data-next-page="2">
                             الصفحة التالية (45) ←
                         </button>
                     </div>
@@ -793,10 +818,10 @@
                     <div class="question-card">
                         <div class="question">ما معنى "فضلاً عن"؟</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, false)">أ) بدلاً من</div>
-                            <div class="option" onclick="selectOption(this, true)">ب) إضافة إلى</div>
-                            <div class="option" onclick="selectOption(this, false)">ج) بسبب</div>
-                            <div class="option" onclick="selectOption(this, false)">د) رغم</div>
+                            <div class="option" data-correct="false">أ) بدلاً من</div>
+                            <div class="option" data-correct="true">ب) إضافة إلى</div>
+                            <div class="option" data-correct="false">ج) بسبب</div>
+                            <div class="option" data-correct="false">د) رغم</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
@@ -804,10 +829,10 @@
                     <div class="question-card">
                         <div class="question">ما معنى "المحببة"؟</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, true)">أ) المفضلة والمرغوبة</div>
-                            <div class="option" onclick="selectOption(this, false)">ب) الصعبة</div>
-                            <div class="option" onclick="selectOption(this, false)">ج) الجديدة</div>
-                            <div class="option" onclick="selectOption(this, false)">د) القديمة</div>
+                            <div class="option" data-correct="true">أ) المفضلة والمرغوبة</div>
+                            <div class="option" data-correct="false">ب) الصعبة</div>
+                            <div class="option" data-correct="false">ج) الجديدة</div>
+                            <div class="option" data-correct="false">د) القديمة</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
@@ -815,20 +840,20 @@
                     <div class="question-card">
                         <div class="question">ما الفكرة الرئيسية للفقرة الثانية؟</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, true)">أ) هوايات السلطان قابوس المختلفة</div>
-                            <div class="option" onclick="selectOption(this, false)">ب) تعليم السلطان قابوس</div>
-                            <div class="option" onclick="selectOption(this, false)">ج) مشاريع السلطان قابوس</div>
-                            <div class="option" onclick="selectOption(this, false)">د) وفاة السلطان قابوس</div>
+                            <div class="option" data-correct="true">أ) هوايات السلطان قابوس المختلفة</div>
+                            <div class="option" data-correct="false">ب) تعليم السلطان قابوس</div>
+                            <div class="option" data-correct="false">ج) مشاريع السلطان قابوس</div>
+                            <div class="option" data-correct="false">د) وفاة السلطان قابوس</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
                     <div class="question-card">
                         <div class="question">ما الفكرة الرئيسية للفقرة الأخيرة؟</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, false)">أ) هوايات السلطان قابوس</div>
-                            <div class="option" onclick="selectOption(this, false)">ب) مشاريع السلطان قابوس</div>
-                            <div class="option" onclick="selectOption(this, true)">ج) وفاة السلطان قابوس وخلافته</div>
-                            <div class="option" onclick="selectOption(this, false)">د) تعليم السلطان قابوس</div>
+                            <div class="option" data-correct="false">أ) هوايات السلطان قابوس</div>
+                            <div class="option" data-correct="false">ب) مشاريع السلطان قابوس</div>
+                            <div class="option" data-correct="true">ج) وفاة السلطان قابوس وخلافته</div>
+                            <div class="option" data-correct="false">د) تعليم السلطان قابوس</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
@@ -836,31 +861,31 @@
                     <div class="question-card">
                         <div class="question">كان السلطان قابوس يحب ركوب الخيل منذ طفولته. (صح/خطأ)</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, true)">صح</div>
-                            <div class="option" onclick="selectOption(this, false)">خطأ</div>
+                            <div class="option" data-correct="true">صح</div>
+                            <div class="option" data-correct="false">خطأ</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
                     <div class="question-card">
                         <div class="question">خلف السلطان هيثم بن طارق السلطان قابوس في الحكم. (صح/خطأ)</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, true)">صح</div>
-                            <div class="option" onclick="selectOption(this, false)">خطأ</div>
+                            <div class="option" data-correct="true">صح</div>
+                            <div class="option" data-correct="false">خطأ</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
                     <div class="question-card">
                         <div class="question">اختر الإجابة الصحيحة: متى توفي السلطان قابوس؟</div>
                         <div class="options">
-                            <div class="option" onclick="selectOption(this, false)">أ) ١٠ يناير ٢٠١٩م</div>
-                            <div class="option" onclick="selectOption(this, true)">ب) ١٠ يناير ٢٠٢٠م</div>
-                            <div class="option" onclick="selectOption(this, false)">ج) ١١ يناير ٢٠٢٠م</div>
-                            <div class="option" onclick="selectOption(this, false)">د) ١٥ يناير ٢٠٢٠م</div>
+                            <div class="option" data-correct="false">أ) ١٠ يناير ٢٠١٩م</div>
+                            <div class="option" data-correct="true">ب) ١٠ يناير ٢٠٢٠م</div>
+                            <div class="option" data-correct="false">ج) ١١ يناير ٢٠٢٠م</div>
+                            <div class="option" data-correct="false">د) ١٥ يناير ٢٠٢٠م</div>
                         </div>
                         <div class="feedback"></div>
                     </div>
                     <div class="navigation-buttons">
-                        <button onclick="showPage(1)" class="nav-button">
+                        <button class="nav-button" data-prev-page="1">
                             ← الصفحة السابقة (44)
                         </button>
                         <div class="final-page-indicator">
@@ -898,13 +923,13 @@
                     ممتاز! لقد أكملت جميع الأسئلة
                 </div>
                 <div class="final-actions">
-                    <button onclick="sendResults()" class="action-button">
+                    <button class="action-button" id="sendResultsBtn">
                         📤 إرسال النتائج
                     </button>
-                    <button onclick="showAllCorrectAnswersFromResults()" class="action-button">
+                    <button class="action-button" id="showCorrectAnswersBtn">
                         📋 عرض الإجابات الصحيحة
                     </button>
-                    <button onclick="restartQuiz()" class="action-button">
+                    <button class="action-button" id="restartQuizBtn">
                         🔄 إعادة المحاولة
                     </button>
                 </div>
@@ -918,216 +943,411 @@
     </main>
 
     <script>
-        let score = 0;
-        let totalQuestions = 0;
-        let wrongAnswers = 0;
-        let studentName = '';
-        let studentClass = '';
+        // كائن التطبيق الرئيسي
+        const QuizApp = {
+            // حالة التطبيق
+            state: {
+                score: 0,
+                totalQuestions: 0,
+                wrongAnswers: 0,
+                studentName: '',
+                studentClass: '',
+                answeredQuestions: new Set(),
+                totalQuestionCount: 0
+            },
 
-        function startQuiz(event) {
-            event.preventDefault();
-            studentName = document.getElementById('studentName').value.trim();
-            studentClass = document.getElementById('studentClass').value;
+            // تهيئة التطبيق
+            init() {
+                this.cacheElements();
+                this.bindEvents();
+                this.countTotalQuestions();
+                this.loadProgress();
+            },
 
-            if (!studentName || !studentClass) {
-                alert('يرجى إدخال جميع البيانات المطلوبة');
-                return;
-            }
+            // تخزين العناصر
+            cacheElements() {
+                this.elements = {
+                    loginScreen: document.getElementById('loginScreen'),
+                    quizContent: document.getElementById('quizContent'),
+                    scoreDisplay: document.getElementById('scoreDisplay'),
+                    progressIndicator: document.getElementById('progressIndicator'),
+                    studentForm: document.getElementById('studentForm'),
+                    score: document.getElementById('score'),
+                    progress: document.getElementById('progress'),
+                    displayStudentName: document.getElementById('displayStudentName'),
+                    displayStudentClass: document.getElementById('displayStudentClass'),
+                    finalResultsPage: document.getElementById('finalResultsPage'),
+                    finalCorrectAnswers: document.getElementById('finalCorrectAnswers'),
+                    finalWrongAnswers: document.getElementById('finalWrongAnswers'),
+                    finalTotalAnswered: document.getElementById('finalTotalAnswered'),
+                    finalResultStudentName: document.getElementById('finalResultStudentName'),
+                    finalResultStudentClass: document.getElementById('finalResultStudentClass'),
+                    finalPercentageCircle: document.getElementById('finalPercentageCircle'),
+                    finalPercentageText: document.getElementById('finalPercentageText'),
+                    finalPerformanceMessage: document.getElementById('finalPerformanceMessage'),
+                    sendResultsBtn: document.getElementById('sendResultsBtn'),
+                    showCorrectAnswersBtn: document.getElementById('showCorrectAnswersBtn'),
+                    restartQuizBtn: document.getElementById('restartQuizBtn')
+                };
+            },
 
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('quizContent').style.display = 'block';
-            document.getElementById('scoreDisplay').style.display = 'block';
+            // ربط الأحداث
+            bindEvents() {
+                // نموذج تسجيل الطالب
+                this.elements.studentForm.addEventListener('submit', (e) => this.startQuiz(e));
 
-            document.getElementById('displayStudentName').textContent = studentName;
-            document.getElementById('displayStudentClass').textContent = studentClass;
-        }
-
-        function showPage(pageIndex) {
-            const pages = document.querySelectorAll('.page-section');
-            pages.forEach(page => page.classList.remove('active'));
-            document.getElementById(`page${pageIndex}`).classList.add('active');
-
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(tab => tab.classList.remove('active'));
-            tabs[pageIndex].classList.add('active');
-        }
-
-        function selectOption(element, isCorrect) {
-            const questionCard = element.closest('.question-card');
-            const options = questionCard.querySelectorAll('.option');
-            const feedback = questionCard.querySelector('.feedback');
-
-            if (questionCard.dataset.answered === 'true') {
-                return;
-            }
-
-            options.forEach(opt => {
-                opt.classList.remove('selected');
-                opt.style.pointerEvents = 'none';
-            });
-
-            element.classList.add('selected');
-
-            if (isCorrect) {
-                score++;
-                feedback.textContent = '✅ إجابة صحيحة! أحسنت';
-                feedback.className = 'feedback correct';
-            } else {
-                wrongAnswers++;
-                feedback.textContent = '❌ إجابة خاطئة.';
-                feedback.className = 'feedback incorrect';
-            }
-
-            questionCard.dataset.answered = 'true';
-            totalQuestions++;
-            document.getElementById('score').textContent = `${score}/${totalQuestions}`;
-            feedback.style.display = 'block';
-
-            checkIfAllQuestionsComplete();
-        }
-
-        function checkIfAllQuestionsComplete() {
-            const allQuestions = document.querySelectorAll('.question-card');
-            const answeredQuestions = document.querySelectorAll('.question-card[data-answered="true"]');
-
-            if (allQuestions.length === answeredQuestions.length && allQuestions.length > 0) {
-                setTimeout(showFinalResultsPage, 1000);
-            }
-        }
-
-        function showFinalResultsPage() {
-            document.getElementById('quizContent').style.display = 'none';
-            document.getElementById('scoreDisplay').style.display = 'none';
-            document.getElementById('finalResultsPage').style.display = 'block';
-
-            const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
-            const percentageCircle = document.getElementById('finalPercentageCircle');
-            const percentageText = document.getElementById('finalPercentageText');
-
-            percentageCircle.style.setProperty('--percentage', `${percentage * 3.6}deg`);
-            percentageText.textContent = `${percentage}%`;
-
-            document.getElementById('finalCorrectAnswers').textContent = score;
-            document.getElementById('finalWrongAnswers').textContent = wrongAnswers;
-            document.getElementById('finalTotalAnswered').textContent = totalQuestions;
-            document.getElementById('finalResultStudentName').textContent = studentName;
-            document.getElementById('finalResultStudentClass').textContent = studentClass;
-
-            const performanceMessage = document.getElementById('finalPerformanceMessage');
-            if (percentage >= 90) {
-                performanceMessage.textContent = `🌟 ممتاز ${studentName.split(' ')[0]}! أداء رائع جداً!`;
-                performanceMessage.style.background = 'rgba(40, 167, 69, 0.3)';
-            } else if (percentage >= 80) {
-                performanceMessage.textContent = `👏 جيد جداً ${studentName.split(' ')[0]}! استمر في التقدم!`;
-                performanceMessage.style.background = 'rgba(40, 167, 69, 0.2)';
-            } else if (percentage >= 70) {
-                performanceMessage.textContent = `👍 جيد ${studentName.split(' ')[0]}! يمكنك تحسين أدائك أكثر!`;
-                performanceMessage.style.background = 'rgba(255, 193, 7, 0.3)';
-            } else if (percentage >= 60) {
-                performanceMessage.textContent = `📚 مقبول ${studentName.split(' ')[0]}، لكن تحتاج لمزيد من المراجعة!`;
-                performanceMessage.style.background = 'rgba(255, 193, 7, 0.2)';
-            } else {
-                performanceMessage.textContent = `💪 لا تستسلم ${studentName.split(' ')[0]}! راجع المادة وحاول مرة أخرى!`;
-                performanceMessage.style.background = 'rgba(220, 53, 69, 0.3)';
-            }
-        }
-
-        function showAllCorrectAnswersFromResults() {
-            document.getElementById('finalResultsPage').style.display = 'none';
-            document.getElementById('quizContent').style.display = 'block';
-
-            const allQuestionCards = document.querySelectorAll('.question-card');
-            allQuestionCards.forEach(questionCard => {
-                const options = questionCard.querySelectorAll('.option');
-                options.forEach(option => {
-                    if (option.onclick && option.onclick.toString().includes('true')) {
-                        option.classList.add('correct');
-                    }
+                // أزرار التنقل بين الصفحات
+                document.querySelectorAll('.nav-button[data-next-page]').forEach(btn => {
+                    btn.addEventListener('click', () => this.showPage(parseInt(btn.dataset.nextPage)));
                 });
-            });
 
-            const confirmDiv = document.createElement('div');
-            confirmDiv.innerHTML = `
-                <div style="
+                document.querySelectorAll('.nav-button[data-prev-page]').forEach(btn => {
+                    btn.addEventListener('click', () => this.showPage(parseInt(btn.dataset.prevPage)));
+                });
+
+                // أزرار التبويب
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.addEventListener('click', () => this.showPage(parseInt(tab.dataset.page)));
+                });
+
+                // اختيار الإجابات
+                document.querySelectorAll('.option').forEach(option => {
+                    option.addEventListener('click', () => this.selectOption(option));
+                });
+
+                // أزرار صفحة النتائج
+                this.elements.sendResultsBtn.addEventListener('click', () => this.sendResults());
+                this.elements.showCorrectAnswersBtn.addEventListener('click', () => this.showAllCorrectAnswersFromResults());
+                this.elements.restartQuizBtn.addEventListener('click', () => this.restartQuiz());
+
+                // حفظ التقدم عند إغلاق الصفحة
+                window.addEventListener('beforeunload', () => this.saveProgress());
+            },
+
+            // عد الأسئلة الكلية
+            countTotalQuestions() {
+                this.state.totalQuestionCount = document.querySelectorAll('.question-card').length;
+            },
+
+            // بدء الاختبار
+            startQuiz(event) {
+                event.preventDefault();
+                
+                this.state.studentName = document.getElementById('studentName').value.trim();
+                this.state.studentClass = document.getElementById('studentClass').value;
+
+                if (!this.state.studentName || !this.state.studentClass) {
+                    alert('يرجى إدخال جميع البيانات المطلوبة');
+                    return;
+                }
+
+                this.elements.loginScreen.style.display = 'none';
+                this.elements.quizContent.style.display = 'block';
+                this.elements.scoreDisplay.style.display = 'block';
+                this.elements.progressIndicator.style.display = 'block';
+
+                this.elements.displayStudentName.textContent = this.state.studentName;
+                this.elements.displayStudentClass.textContent = this.state.studentClass;
+
+                this.updateProgress();
+                this.saveProgress();
+            },
+
+            // عرض صفحة معينة
+            showPage(pageIndex) {
+                const pages = document.querySelectorAll('.page-section');
+                pages.forEach(page => page.classList.remove('active'));
+                document.getElementById(`page${pageIndex}`).classList.add('active');
+
+                const tabs = document.querySelectorAll('.tab');
+                tabs.forEach(tab => tab.classList.remove('active'));
+                tabs[pageIndex].classList.add('active');
+
+                this.saveProgress();
+            },
+
+            // اختيار إجابة
+            selectOption(element) {
+                const questionCard = element.closest('.question-card');
+                const questionId = this.getQuestionId(questionCard);
+
+                if (this.state.answeredQuestions.has(questionId)) {
+                    return;
+                }
+
+                const isCorrect = element.dataset.correct === 'true';
+                const options = questionCard.querySelectorAll('.option');
+                const feedback = questionCard.querySelector('.feedback');
+
+                options.forEach(opt => {
+                    opt.classList.remove('selected');
+                    opt.style.pointerEvents = 'none';
+                });
+
+                element.classList.add('selected');
+
+                if (isCorrect) {
+                    this.state.score++;
+                    feedback.textContent = '✅ إجابة صحيحة! أحسنت';
+                    feedback.className = 'feedback correct';
+                } else {
+                    this.state.wrongAnswers++;
+                    feedback.textContent = '❌ إجابة خاطئة.';
+                    feedback.className = 'feedback incorrect';
+                }
+
+                this.state.answeredQuestions.add(questionId);
+                this.state.totalQuestions++;
+                
+                this.elements.score.textContent = `${this.state.score}/${this.state.totalQuestions}`;
+                feedback.style.display = 'block';
+
+                this.updateProgress();
+                this.saveProgress();
+                this.checkIfAllQuestionsComplete();
+            },
+
+            // الحصول على معرف السؤال
+            getQuestionId(questionCard) {
+                const page = questionCard.closest('.page-section');
+                const pageIndex = Array.from(page.parentNode.children).indexOf(page);
+                const questionIndex = Array.from(page.querySelectorAll('.question-card')).indexOf(questionCard);
+                return `page${pageIndex}-question${questionIndex}`;
+            },
+
+            // تحديث شريط التقدم
+            updateProgress() {
+                const progress = this.state.totalQuestionCount > 0 ? 
+                    Math.round((this.state.answeredQuestions.size / this.state.totalQuestionCount) * 100) : 0;
+                this.elements.progress.textContent = progress;
+            },
+
+            // التحقق من اكتمال جميع الأسئلة
+            checkIfAllQuestionsComplete() {
+                if (this.state.answeredQuestions.size === this.state.totalQuestionCount && this.state.totalQuestionCount > 0) {
+                    setTimeout(() => this.showFinalResultsPage(), 1000);
+                }
+            },
+
+            // عرض صفحة النتائج النهائية
+            showFinalResultsPage() {
+                this.elements.quizContent.style.display = 'none';
+                this.elements.scoreDisplay.style.display = 'none';
+                this.elements.progressIndicator.style.display = 'none';
+                this.elements.finalResultsPage.style.display = 'block';
+
+                const percentage = this.state.totalQuestions > 0 ? 
+                    Math.round((this.state.score / this.state.totalQuestions) * 100) : 0;
+                
+                this.elements.finalPercentageCircle.style.setProperty('--percentage', `${percentage * 3.6}deg`);
+                this.elements.finalPercentageText.textContent = `${percentage}%`;
+
+                this.elements.finalCorrectAnswers.textContent = this.state.score;
+                this.elements.finalWrongAnswers.textContent = this.state.wrongAnswers;
+                this.elements.finalTotalAnswered.textContent = this.state.totalQuestions;
+                this.elements.finalResultStudentName.textContent = this.state.studentName;
+                this.elements.finalResultStudentClass.textContent = this.state.studentClass;
+
+                this.setPerformanceMessage(percentage);
+                this.clearProgress();
+            },
+
+            // تعيين رسالة الأداء
+            setPerformanceMessage(percentage) {
+                const performanceMessage = this.elements.finalPerformanceMessage;
+                const firstName = this.state.studentName.split(' ')[0];
+                
+                if (percentage >= 90) {
+                    performanceMessage.textContent = `🌟 ممتاز ${firstName}! أداء رائع جداً!`;
+                    performanceMessage.style.background = 'rgba(40, 167, 69, 0.3)';
+                } else if (percentage >= 80) {
+                    performanceMessage.textContent = `👏 جيد جداً ${firstName}! استمر في التقدم!`;
+                    performanceMessage.style.background = 'rgba(40, 167, 69, 0.2)';
+                } else if (percentage >= 70) {
+                    performanceMessage.textContent = `👍 جيد ${firstName}! يمكنك تحسين أدائك أكثر!`;
+                    performanceMessage.style.background = 'rgba(255, 193, 7, 0.3)';
+                } else if (percentage >= 60) {
+                    performanceMessage.textContent = `📚 مقبول ${firstName}، لكن تحتاج لمزيد من المراجعة!`;
+                    performanceMessage.style.background = 'rgba(255, 193, 7, 0.2)';
+                } else {
+                    performanceMessage.textContent = `💪 لا تستسلم ${firstName}! راجع المادة وحاول مرة أخرى!`;
+                    performanceMessage.style.background = 'rgba(220, 53, 69, 0.3)';
+                }
+            },
+
+            // عرض جميع الإجابات الصحيحة
+            showAllCorrectAnswersFromResults() {
+                this.elements.finalResultsPage.style.display = 'none';
+                this.elements.quizContent.style.display = 'block';
+
+                document.querySelectorAll('.question-card').forEach(questionCard => {
+                    const options = questionCard.querySelectorAll('.option');
+                    options.forEach(option => {
+                        if (option.dataset.correct === 'true') {
+                            option.classList.add('correct');
+                        }
+                    });
+                });
+
+                this.showNotification('📋 تم عرض جميع الإجابات الصحيحة! يمكنك الآن مراجعة إجاباتك في جميع الأقسام');
+            },
+
+            // إعادة بدء الاختبار
+            restartQuiz() {
+                this.clearProgress();
+                window.location.reload();
+            },
+
+            // إرسال النتائج
+            sendResults() {
+                const percentage = this.state.totalQuestions > 0 ? 
+                    Math.round((this.state.score / this.state.totalQuestions) * 100) : 0;
+                
+                let performanceLevel = '';
+                if (percentage >= 90) performanceLevel = 'ممتاز 🌟';
+                else if (percentage >= 80) performanceLevel = 'جيد جداً 👏';
+                else if (percentage >= 70) performanceLevel = 'جيد 👍';
+                else if (percentage >= 60) performanceLevel = 'مقبول 📚';
+                else performanceLevel = 'يحتاج تحسين 💪';
+
+                const message = `📊 نتائج الطالب في أسئلة السلطان قابوس
+
+👤 اسم الطالب: ${this.state.studentName}
+🏫 الشعبة: ${this.state.studentClass}
+📈 النتائج:
+✅ الإجابات الصحيحة: ${this.state.score}
+❌ الإجابات الخاطئة: ${this.state.wrongAnswers}
+📝 إجمالي الأسئلة: ${this.state.totalQuestions}
+🎯 النسبة المئوية: ${percentage}%
+📊 التقييم: ${performanceLevel}
+تم إنجاز الاختبار بتاريخ: ${new Date().toLocaleDateString('ar-SA')}`;
+
+                const choice = confirm("اختر طريقة إرسال النتائج:\n\n- موافق: واتساب\n- إلغاء: البريد الإلكتروني (omk456456@gmail.com)");
+
+                if (choice) {
+                    // واتساب
+                    const encodedMessage = encodeURIComponent(message);
+                    const teacherNumber = prompt("أدخل رقم هاتف المعلم (مع مفتاح الدولة، مثل 96812345678):", "968");
+                    if (teacherNumber) {
+                        window.open(`https://wa.me/${teacherNumber}?text=${encodedMessage}`, '_blank');
+                    }
+                } else {
+                    // البريد الإلكتروني
+                    const email = "omk456456@gmail.com";
+                    window.open(`mailto:${email}?subject=نتائج اختبار السلطان قابوس - ${this.state.studentName}&body=${encodeURIComponent(message)}`, '_blank');
+                }
+
+                this.showNotification("تم فتح تطبيق الإرسال!");
+            },
+
+            // عرض إشعار
+            showNotification(message) {
+                const notification = document.createElement('div');
+                notification.textContent = message;
+                notification.style.cssText = `
                     position: fixed;
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
                     background: #28a745;
                     color: white;
-                    padding: 20px 30px;
-                    border-radius: 10px;
+                    padding: 15px 25px;
+                    border-radius: 8px;
                     z-index: 10000;
-                    text-align: center;
                     font-weight: bold;
                     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-                ">
-                    📋 تم عرض جميع الإجابات الصحيحة! يمكنك الآن مراجعة إجاباتك في جميع الأقسام
-                </div>
-            `;
-            document.body.appendChild(confirmDiv);
-            setTimeout(() => confirmDiv.remove(), 4000);
-        }
+                `;
+                document.body.appendChild(notification);
+                setTimeout(() => notification.remove(), 3000);
+            },
 
-        function restartQuiz() {
-            window.location.reload();
-        }
+            // حفظ التقدم
+            saveProgress() {
+                const progress = {
+                    studentName: this.state.studentName,
+                    studentClass: this.state.studentClass,
+                    score: this.state.score,
+                    totalQuestions: this.state.totalQuestions,
+                    wrongAnswers: this.state.wrongAnswers,
+                    answeredQuestions: Array.from(this.state.answeredQuestions),
+                    currentPage: this.getCurrentPageIndex()
+                };
+                localStorage.setItem('quizProgress', JSON.stringify(progress));
+            },
 
-        function sendResults() {
-            const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
-            let performanceLevel = '';
+            // تحميل التقدم
+            loadProgress() {
+                const savedProgress = localStorage.getItem('quizProgress');
+                if (savedProgress) {
+                    const progress = JSON.parse(savedProgress);
+                    
+                    if (progress.studentName && progress.studentClass) {
+                        // تعبئة نموذج التسجيل تلقائياً
+                        document.getElementById('studentName').value = progress.studentName;
+                        document.getElementById('studentClass').value = progress.studentClass;
+                        
+                        if (confirm('تم العثور على تقدم سابق. هل تريد الاستمرار من حيث توقفت؟')) {
+                            this.state.studentName = progress.studentName;
+                            this.state.studentClass = progress.studentClass;
+                            this.state.score = progress.score || 0;
+                            this.state.totalQuestions = progress.totalQuestions || 0;
+                            this.state.wrongAnswers = progress.wrongAnswers || 0;
+                            this.state.answeredQuestions = new Set(progress.answeredQuestions || []);
+                            
+                            this.elements.loginScreen.style.display = 'none';
+                            this.elements.quizContent.style.display = 'block';
+                            this.elements.scoreDisplay.style.display = 'block';
+                            this.elements.progressIndicator.style.display = 'block';
 
-            if (percentage >= 90) performanceLevel = 'ممتاز 🌟';
-            else if (percentage >= 80) performanceLevel = 'جيد جداً 👏';
-            else if (percentage >= 70) performanceLevel = 'جيد 👍';
-            else if (percentage >= 60) performanceLevel = 'مقبول 📚';
-            else performanceLevel = 'يحتاج تحسين 💪';
-
-            const message = `📊 نتائج الطالب في أسئلة السلطان قابوس
-
-👤 اسم الطالب: ${studentName}
-🏫 الشعبة: ${studentClass}
-📈 النتائج:
-✅ الإجابات الصحيحة: ${score}
-❌ الإجابات الخاطئة: ${wrongAnswers}
-📝 إجمالي الأسئلة: ${totalQuestions}
-🎯 النسبة المئوية: ${percentage}%
-📊 التقييم: ${performanceLevel}
-تم إنجاز الاختبار بتاريخ: ${new Date().toLocaleDateString('ar-SA')}`;
-
-            const choice = confirm("اختر طريقة إرسال النتائج:\n\n- موافق: واتساب\n- إلغاء: البريد الإلكتروني (omk456456@gmail.com)");
-
-            if (choice) {
-                // واتساب
-                const encodedMessage = encodeURIComponent(message);
-                const teacherNumber = prompt("أدخل رقم هاتف المعلم (مع مفتاح الدولة، مثل 96812345678):", "968");
-                if (teacherNumber) {
-                    window.open(`https://wa.me/${teacherNumber}?text=${encodedMessage}`, '_blank');
+                            this.elements.displayStudentName.textContent = this.state.studentName;
+                            this.elements.displayStudentClass.textContent = this.state.studentClass;
+                            this.elements.score.textContent = `${this.state.score}/${this.state.totalQuestions}`;
+                            
+                            this.showPage(progress.currentPage || 0);
+                            this.restoreAnsweredQuestions();
+                            this.updateProgress();
+                        }
+                    }
                 }
-            } else {
-                // البريد الإلكتروني
-                const email = "omk456456@gmail.com";
-                window.open(`mailto:${email}?subject=نتائج اختبار السلطان قابوس - ${studentName}&body=${encodeURIComponent(message)}`, '_blank');
-            }
+            },
 
-            // رسالة تأكيد
-            const confirmDiv = document.createElement('div');
-            confirmDiv.textContent = "تم فتح تطبيق الإرسال!";
-            confirmDiv.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: #28a745;
-                color: white;
-                padding: 15px 25px;
-                border-radius: 8px;
-                z-index: 10000;
-                font-weight: bold;
-            `;
-            document.body.appendChild(confirmDiv);
-            setTimeout(() => confirmDiv.remove(), 3000);
-        }
+            // استعادة الإجابات المحفوظة
+            restoreAnsweredQuestions() {
+                this.state.answeredQuestions.forEach(questionId => {
+                    const [pageIndex, questionIndex] = questionId.split('-').map(str => parseInt(str.replace(/\D/g, '')));
+                    const page = document.getElementById(`page${pageIndex}`);
+                    if (page) {
+                        const questionCards = page.querySelectorAll('.question-card');
+                        if (questionCards[questionIndex]) {
+                            questionCards[questionIndex].dataset.answered = 'true';
+                            const options = questionCards[questionIndex].querySelectorAll('.option');
+                            options.forEach(opt => {
+                                opt.style.pointerEvents = 'none';
+                            });
+                        }
+                    }
+                });
+            },
+
+            // الحصول على رقم الصفحة الحالية
+            getCurrentPageIndex() {
+                const activePage = document.querySelector('.page-section.active');
+                if (activePage) {
+                    return parseInt(activePage.id.replace('page', ''));
+                }
+                return 0;
+            },
+
+            // مسح التقدم المحفوظ
+            clearProgress() {
+                localStorage.removeItem('quizProgress');
+            }
+        };
+
+        // بدء التطبيق عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            QuizApp.init();
+        });
     </script>
 </body>
 </html>
