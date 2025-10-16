@@ -3,302 +3,284 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أسئلة تفاعلية - السلطان قابوس بن سعيد</title>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;700&display=swap" rel="stylesheet">
+    <title>أسئلة تفاعلية - شخصية السلطان قابوس</title>
     <style>
-        :root {
-            --primary-color: #007bff;
-            --success-color: #28a745;
-            --danger-color: #dc3545;
-            --light-color: #f8f9fa;
-            --dark-color: #2c3e50;
-            --white-color: #ffffff;
-            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            --border-radius: 10px;
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            font-family: 'Baloo Bhaijaan 2', sans-serif;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            min-height: 100vh;
+            margin: 0;
             padding: 20px;
-            direction: rtl;
+            min-height: 100vh;
         }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: var(--white-color);
+            background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             overflow: hidden;
         }
-
+        
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: var(--white-color);
+            color: white;
             padding: 30px;
             text-align: center;
         }
-
+        
         .header h1 {
             margin: 0;
             font-size: 2.5rem;
             font-weight: bold;
         }
-
+        
         .tabs {
             display: flex;
-            background: var(--light-color);
+            background: #f8f9fa;
             border-bottom: 2px solid #e9ecef;
         }
-
+        
         .tab {
             flex: 1;
             padding: 20px;
             text-align: center;
-            background: var(--light-color);
+            background: #f8f9fa;
             border: none;
             cursor: pointer;
             font-size: 1.1rem;
             font-weight: bold;
-            transition: var(--transition);
-            color: var(--dark-color);
+            transition: all 0.3s ease;
+            color: #495057;
         }
-
+        
         .tab.active {
-            background: var(--primary-color);
-            color: var(--white-color);
+            background: #007bff;
+            color: white;
         }
-
+        
         .tab:hover:not(.active) {
             background: #e9ecef;
         }
-
+        
         .content {
             padding: 30px;
             min-height: 600px;
         }
-
+        
         .page-section {
             display: none;
         }
-
+        
         .page-section.active {
             display: block;
         }
-
+        
         .text-box {
-            background: var(--light-color);
-            border-right: 4px solid var(--primary-color);
+            background: #f8f9fa;
+            border-right: 4px solid #007bff;
             padding: 20px;
             margin-bottom: 30px;
-            border-radius: var(--border-radius);
+            border-radius: 8px;
             line-height: 1.8;
             font-size: 1.1rem;
         }
-
+        
         .section-title {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: var(--white-color);
+            color: white;
             padding: 15px 20px;
             margin: 30px 0 20px 0;
-            border-radius: var(--border-radius);
+            border-radius: 10px;
             font-size: 1.3rem;
             font-weight: bold;
         }
-
+        
         .question-card {
-            background: var(--white-color);
+            background: white;
             border: 2px solid #e9ecef;
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
-
+        
         .question-card:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
             transform: translateY(-2px);
         }
-
+        
         .question {
             font-size: 1.1rem;
             font-weight: bold;
-            color: var(--dark-color);
+            color: #2c3e50;
             margin-bottom: 15px;
         }
-
+        
         .options {
             display: grid;
             gap: 10px;
         }
-
+        
         .option {
             padding: 12px 16px;
             border: 2px solid #e9ecef;
-            border-radius: var(--border-radius);
+            border-radius: 8px;
             cursor: pointer;
-            transition: var(--transition);
-            background: var(--light-color);
-            text-align: center;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
         }
-
+        
         .option:hover {
-            border-color: var(--primary-color);
+            border-color: #007bff;
             background: #e3f2fd;
         }
-
+        
         .option.selected {
-            border-color: var(--primary-color);
-            background: var(--primary-color);
-            color: var(--white-color);
+            border-color: #007bff;
+            background: #007bff;
+            color: white;
         }
-
+        
         .option.correct {
-            border-color: var(--success-color);
-            background: var(--success-color);
-            color: var(--white-color);
+            border-color: #28a745;
+            background: #28a745;
+            color: white;
         }
-
+        
         .option.incorrect {
-            border-color: var(--danger-color);
-            background: var(--danger-color);
-            color: var(--white-color);
+            border-color: #dc3545;
+            background: #dc3545;
+            color: white;
         }
-
+        
         .feedback {
             margin-top: 15px;
             padding: 12px;
-            border-radius: var(--border-radius);
+            border-radius: 8px;
             font-weight: bold;
             display: none;
         }
-
+        
         .feedback.correct {
             background: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
-            display: block;
         }
-
+        
         .feedback.incorrect {
             background: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
-            display: block;
         }
+        
 
+        
         .score-display {
             position: fixed;
             top: 20px;
             left: 20px;
-            background: var(--success-color);
-            color: var(--white-color);
+            background: #28a745;
+            color: white;
             padding: 15px 20px;
-            border-radius: var(--border-radius);
+            border-radius: 10px;
             font-weight: bold;
-            box-shadow: var(--shadow);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             z-index: 1000;
         }
-
+        
         .final-results-page {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: var(--white-color);
+            color: white;
             padding: 40px;
             margin: 20px;
             border-radius: 20px;
             text-align: center;
-            box-shadow: var(--shadow);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             min-height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
-
+        
         .results-title {
             font-size: 2rem;
             font-weight: bold;
             margin-bottom: 20px;
         }
-
+        
         .results-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             margin-top: 20px;
         }
-
+        
         .result-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
             padding: 20px;
-            border-radius: var(--border-radius);
+            border-radius: 10px;
             backdrop-filter: blur(10px);
         }
-
+        
         .result-number {
             font-size: 2.5rem;
             font-weight: bold;
             margin-bottom: 10px;
         }
-
+        
         .result-label {
             font-size: 1.1rem;
             opacity: 0.9;
         }
-
+        
         .percentage-circle {
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            background: conic-gradient(var(--success-color) 0deg, var(--success-color) var(--percentage, 0deg), #e9ecef var(--percentage, 0deg), #e9ecef 360deg);
+            background: conic-gradient(#28a745 0deg, #28a745 var(--percentage, 0deg), #e9ecef var(--percentage, 0deg), #e9ecef 360deg);
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
             position: relative;
         }
-
+        
         .percentage-inner {
             width: 90px;
             height: 90px;
-            background: var(--white-color);
+            background: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--dark-color);
+            color: #2c3e50;
             font-size: 1.5rem;
             font-weight: bold;
         }
-
+        
         .performance-message {
             font-size: 1.3rem;
             margin-top: 20px;
             padding: 15px;
-            border-radius: var(--border-radius);
-            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
         }
-
+        
         .author-name {
             text-align: center;
             padding: 20px;
-            color: var(--white-color);
+            color: white;
             font-size: 1.1rem;
             font-weight: bold;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
             margin-top: 20px;
-            border-radius: var(--border-radius);
+            border-radius: 10px;
         }
-
+        
+        /* تصميم واجهة تسجيل الطالب */
         .login-screen {
             min-height: 100vh;
             display: flex;
@@ -307,250 +289,153 @@
             align-items: center;
             padding: 20px;
         }
-
+        
         .login-header {
             text-align: center;
             margin-bottom: 40px;
-            color: var(--white-color);
+            color: white;
         }
-
+        
         .login-header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-
+        
         .login-header p {
             font-size: 1.2rem;
             opacity: 0.9;
         }
-
+        
         .login-form {
-            background: var(--white-color);
+            background: white;
             padding: 40px;
             border-radius: 20px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             max-width: 500px;
             width: 100%;
         }
-
+        
         .login-form h2 {
             text-align: center;
-            color: var(--dark-color);
+            color: #2c3e50;
             margin-bottom: 30px;
             font-size: 1.5rem;
         }
-
+        
         .form-group {
             margin-bottom: 25px;
         }
-
+        
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            color: var(--dark-color);
+            color: #2c3e50;
             font-weight: bold;
             font-size: 1.1rem;
         }
-
+        
         .form-group input,
         .form-group select {
             width: 100%;
             padding: 15px;
             border: 2px solid #e9ecef;
-            border-radius: var(--border-radius);
+            border-radius: 10px;
             font-size: 1rem;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             box-sizing: border-box;
         }
-
+        
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
         }
-
+        
         .start-btn {
             width: 100%;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: var(--white-color);
+            color: white;
             border: none;
             padding: 18px;
             border-radius: 12px;
             font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             margin-top: 20px;
         }
-
+        
         .start-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(102, 174, 234, 0.3);
+            box-shadow: 0 8px 16px rgba(102,174,234,0.3);
         }
-
+        
         .nav-button {
-            transition: var(--transition);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: var(--white-color);
-            border: none;
-            padding: 15px 25px;
-            border-radius: var(--border-radius);
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            transition: all 0.3s ease;
         }
-
+        
         .nav-button:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
         }
-
+        
         .welcome-message {
             margin-top: 30px;
             padding: 20px;
-            background: var(--light-color);
-            border-radius: var(--border-radius);
-            border-right: 4px solid var(--primary-color);
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-right: 4px solid #007bff;
         }
-
+        
         .welcome-message p {
             margin: 10px 0;
-            color: var(--dark-color);
+            color: #495057;
             font-size: 1rem;
         }
-
+        
         .student-info {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
             padding: 10px 20px;
-            border-radius: var(--border-radius);
+            border-radius: 10px;
             margin-top: 10px;
             font-size: 1.1rem;
             font-weight: bold;
         }
-
+        
         .student-result-info {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
             padding: 20px;
-            border-radius: var(--border-radius);
+            border-radius: 10px;
             margin-bottom: 20px;
             text-align: center;
         }
-
+        
         .student-result-info p {
             margin: 8px 0;
             font-size: 1.1rem;
         }
-
-        .navigation-buttons {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 30px;
-            padding: 20px;
-            background: var(--light-color);
-            border-radius: var(--border-radius);
-        }
-
-        .final-page-indicator {
-            background: linear-gradient(135deg, var(--danger-color) 0%, #c82333 100%);
-            color: var(--white-color);
-            padding: 15px 25px;
-            border-radius: var(--border-radius);
-            font-size: 1.1rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .final-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 30px;
-            align-items: center;
-        }
-
-        .action-button {
-            background: var(--success-color);
-            color: var(--white-color);
-            border: none;
-            padding: 15px 30px;
-            border-radius: var(--border-radius);
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            width: 80%;
-            max-width: 300px;
-            transition: var(--transition);
-        }
-
-        .action-button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
-
-        .action-button:nth-child(1) {
-            background: #25D366;
-        }
-
-        .action-button:nth-child(2) {
-            background: var(--primary-color);
-        }
-
-        .action-button:nth-child(3) {
-            background: var(--success-color);
-        }
-
-        .progress-indicator {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--primary-color);
-            color: var(--white-color);
-            padding: 10px 15px;
-            border-radius: var(--border-radius);
-            font-weight: bold;
-            box-shadow: var(--shadow);
-            z-index: 1000;
-        }
-
+        
         @media (max-width: 768px) {
             .tabs {
                 flex-direction: column;
             }
-
+            
             .tab {
                 padding: 15px;
                 font-size: 1rem;
             }
-
+            
             .header h1 {
                 font-size: 1.8rem;
             }
-
+            
             .score-display {
                 position: relative;
                 top: 0;
                 left: 0;
                 margin-bottom: 20px;
-                text-align: center;
-            }
-
-            .final-actions {
-                flex-direction: column;
-            }
-
-            .progress-indicator {
-                position: relative;
-                bottom: 0;
-                right: 0;
-                margin-top: 20px;
                 text-align: center;
             }
         }
@@ -560,25 +445,24 @@
     <div class="score-display" id="scoreDisplay" style="display: none;">
         النقاط: <span id="score">0</span>
     </div>
-
-    <div class="progress-indicator" id="progressIndicator" style="display: none;">
-        التقدم: <span id="progress">0</span>%
-    </div>
-
+    
     <main class="container">
         <!-- واجهة تسجيل الطالب -->
         <div class="login-screen" id="loginScreen">
             <div class="login-header">
-                <h1>أسئلة تفاعلية حول السلطان قابوس بن سعيد</h1>
+                <h1>أسئلة تفاعلية حول شخصية السلطان قابوس بن سعيد</h1>
                 <p>طيب الله ثراه</p>
             </div>
+            
             <div class="login-form">
                 <h2>مرحباً بك! يرجى إدخال بياناتك</h2>
-                <form id="studentForm">
+                
+                <form id="studentForm" onsubmit="startQuiz(event)">
                     <div class="form-group">
                         <label for="studentName">الاسم الكامل:</label>
                         <input type="text" id="studentName" name="studentName" required placeholder="أدخل اسمك الكامل">
                     </div>
+                    
                     <div class="form-group">
                         <label for="studentClass">الشعبة:</label>
                         <select id="studentClass" name="studentClass" required>
@@ -588,10 +472,12 @@
                             <option value="الصف الخامس - شعبة 3">شعبة 3</option>
                         </select>
                     </div>
+                    
                     <button type="submit" class="start-btn">
                         🚀 ابدأ الأسئلة التفاعلية
                     </button>
                 </form>
+                
                 <div class="welcome-message">
                     <p>📚 ستجد أسئلة متنوعة حول شخصية السلطان قابوس الراحل</p>
                     <p>⭐ احرص على قراءة كل سؤال بعناية قبل الإجابة</p>
@@ -599,755 +485,825 @@
                 </div>
             </div>
         </div>
-
+        
         <!-- المحتوى الرئيسي للأسئلة -->
         <div class="quiz-content" id="quizContent" style="display: none;">
             <header class="header">
-                <h1>أسئلة تفاعلية حول السلطان قابوس بن سعيد</h1>
+                <h1>أسئلة تفاعلية حول شخصية السلطان قابوس بن سعيد</h1>
                 <p>طيب الله ثراه</p>
                 <div class="student-info">
                     <span id="displayStudentName"></span> - <span id="displayStudentClass"></span>
                 </div>
             </header>
-
+        
             <nav class="tabs">
-                <button class="tab active" data-page="0">صفحة 43</button>
-                <button class="tab" data-page="1">صفحة 44</button>
-                <button class="tab" data-page="2">صفحة 45</button>
+                <button class="tab active" onclick="showPage(0)">صفحة 43</button>
+                <button class="tab" onclick="showPage(1)">صفحة 44</button>
+                <button class="tab" onclick="showPage(2)">صفحة 45</button>
             </nav>
-
+        
             <div class="content">
-                <!-- صفحة 43 -->
-                <section class="page-section active" id="page0">
-                    <div class="text-box">
-                        <h3>النص الأصلي - صفحة 43:</h3>
-                        <p>
-                            ولد السلطان قابوس بن سعيد – طيب الله ثراه – في مدينة صلالة، بمحافظة ظفار، في ١٨ من نوفمبر ١٩٤٠، الموافق ١٨ من نوفمبر ١٩٤٠م، وهو من سلالة الإمام أحمد بن سعيد، مؤسس الدولة الأولى لأسرة البوسعيد.
-                        </p>
-                        <p>
-                            تلقّى في طفولته مبادئ اللغة العربية، والدين الإسلامي، على أيدي أساتذة متخصصين، كما تابع المراحل الابتدائية في المدرسة السعيدية، وفي سبتمبر من العام ١٩٥٨م أرسله والده السلطان سعيد بن تيمور إلى إنجلترا، فواصل تعليمه لمدّة عامين في مدرسة (سافوك) الشهيرة، ثم التحق في عام ١٩٦٠م بأكاديمية (سانت هيرست) العسكرية الملكية ضابطاً مرشّحاً، فأتمّ تدريباً لمدة عامين، درس خلالهما العلوم العسكرية وتلقّى مهارات الجندية.
-                        </p>
+            <!-- صفحة 43 -->
+            <section class="page-section active" id="page0">
+                <div class="text-box">
+                    <h3>النص الأصلي - صفحة 43:</h3>
+                    <p>ولد السلطان قابوس بن سعيد – طيب الله ثراه – في مدينة صلالة، بمحافظة ظفار، في ١٨ من نوفمبر ١٩٤٠، الموافق ١٨ من نوفمبر ١٩٤٠م، وهو من سلالة الإمام أحمد بن سعيد، مؤسس الدولة الأولى لأسرة البوسعيد.</p>
+                    <p>تلقّى في طفولته مبادئ اللغة العربية، والدين الإسلامي، على أيدي أساتذة متخصصين، كما تابع المراحل الابتدائية في المدرسة السعيدية، وفي سبتمبر من العام ١٩٥٨م أرسله والده السلطان سعيد بن تيمور إلى إنجلترا، فواصل تعليمه لمدّة عامين في مدرسة (سافوك) الشهيرة، ثم التحق في عام ١٩٦٠م بأكاديمية (سانت هيرست) العسكرية الملكية ضابطاً مرشّحاً، فأتمّ تدريباً لمدة عامين، درس خلالهما العلوم العسكرية وتلقّى مهارات الجندية.</p>
+                </div>
+                
+                <div class="section-title">أسئلة المعجم - الفقرة الأولى</div>
+                <div class="question-card">
+                    <div class="question">ما معنى كلمة "سلالة"؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">أ) المكان الذي ولد فيه</div>
+                        <div class="option" onclick="selectOption(this, true)">ب) النسب والعائلة</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) التاريخ الذي ولد فيه</div>
+                        <div class="option" onclick="selectOption(this, false)">د) المدينة التي عاش فيها</div>
                     </div>
-                    <div class="section-title">أسئلة المعجم - الفقرة الأولى</div>
-                    <div class="question-card">
-                        <div class="question">ما معنى كلمة "سلالة"؟</div>
-                        <div class="options">
-                            <div class="option" data-correct="false">أ) المكان الذي ولد فيه</div>
-                            <div class="option" data-correct="true">ب) النسب والعائلة</div>
-                            <div class="option" data-correct="false">ج) التاريخ الذي ولد فيه</div>
-                            <div class="option" data-correct="false">د) المدينة التي عاش فيها</div>
-                        </div>
-                        <div class="feedback"></div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="section-title">أسئلة المعجم - الفقرة الثانية</div>
+                <div class="question-card">
+                    <div class="question">ما معنى كلمة "مبادئ"؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">أ) الأسس والقواعد الأولى</div>
+                        <div class="option" onclick="selectOption(this, false)">ب) الكتب المدرسية</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) المعلمون</div>
+                        <div class="option" onclick="selectOption(this, false)">د) الامتحانات</div>
                     </div>
-                    <div class="section-title">أسئلة المعجم - الفقرة الثانية</div>
-                    <div class="question-card">
-                        <div class="question">ما معنى كلمة "مبادئ"؟</div>
-                        <div class="options">
-                            <div class="option" data-correct="true">أ) الأسس والقواعد الأولى</div>
-                            <div class="option" data-correct="false">ب) الكتب المدرسية</div>
-                            <div class="option" data-correct="false">ج) المعلمون</div>
-                            <div class="option" data-correct="false">د) الامتحانات</div>
-                        </div>
-                        <div class="feedback"></div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">ما معنى "ضابطاً مرشّحاً"؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">أ) ضابط متقاعد</div>
+                        <div class="option" onclick="selectOption(this, true)">ب) طالب ضابط في التدريب</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) ضابط كبير</div>
+                        <div class="option" onclick="selectOption(this, false)">د) قائد عسكري</div>
                     </div>
-                    <div class="question-card">
-                        <div class="question">ما معنى "ضابطاً مرشّحاً"؟</div>
-                        <div class="options">
-                            <div class="option" data-correct="false">أ) ضابط متقاعد</div>
-                            <div class="option" data-correct="true">ب) طالب ضابط في التدريب</div>
-                            <div class="option" data-correct="false">ج) ضابط كبير</div>
-                            <div class="option" data-correct="false">د) قائد عسكري</div>
-                        </div>
-                        <div class="feedback"></div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="section-title">أسئلة الفهم - اختيار متعدد</div>
+                <div class="question-card">
+                    <div class="question">ما الفكرة الرئيسية للفقرة الأولى؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">أ) تعليم السلطان قابوس</div>
+                        <div class="option" onclick="selectOption(this, true)">ب) ولادة السلطان قابوس ونسبه</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) سفر السلطان قابوس</div>
+                        <div class="option" onclick="selectOption(this, false)">د) حكم السلطان قابوس</div>
                     </div>
-                    <div class="section-title">أسئلة الفهم - اختيار متعدد</div>
-                    <div class="question-card">
-                        <div class="question">ما الفكرة الرئيسية للفقرة الأولى؟</div>
-                        <div class="options">
-                            <div class="option" data-correct="false">أ) تعليم السلطان قابوس</div>
-                            <div class="option" data-correct="true">ب) ولادة السلطان قابوس ونسبه</div>
-                            <div class="option" data-correct="false">ج) سفر السلطان قابوس</div>
-                            <div class="option" data-correct="false">د) حكم السلطان قابوس</div>
-                        </div>
-                        <div class="feedback"></div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">ما الفكرة الرئيسية للفقرة الثانية؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">أ) مراحل تعليم السلطان قابوس المختلفة</div>
+                        <div class="option" onclick="selectOption(this, false)">ب) ولادة السلطان قابوس</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) هوايات السلطان قابوس</div>
+                        <div class="option" onclick="selectOption(this, false)">د) وفاة السلطان قابوس</div>
                     </div>
-                    <div class="question-card">
-                        <div class="question">ما الفكرة الرئيسية للفقرة الثانية؟</div>
-                        <div class="options">
-                            <div class="option" data-correct="true">أ) مراحل تعليم السلطان قابوس المختلفة</div>
-                            <div class="option" data-correct="false">ب) ولادة السلطان قابوس</div>
-                            <div class="option" data-correct="false">ج) هوايات السلطان قابوس</div>
-                            <div class="option" data-correct="false">د) وفاة السلطان قابوس</div>
-                        </div>
-                        <div class="feedback"></div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="section-title">أسئلة الفهم - صح أم خطأ</div>
+                <div class="question-card">
+                    <div class="question">ولد السلطان قابوس في مدينة مسقط. (صح/خطأ)</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">صح</div>
+                        <div class="option" onclick="selectOption(this, true)">خطأ</div>
                     </div>
-                    <div class="section-title">أسئلة الفهم - صح أم خطأ</div>
-                    <div class="question-card">
-                        <div class="question">ولد السلطان قابوس في مدينة مسقط. (صح/خطأ)</div>
-                        <div class="options">
-                            <div class="option" data-correct="false">صح</div>
-                            <div class="option" data-correct="true">خطأ</div>
-                        </div>
-                        <div class="feedback"></div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">درس السلطان قابوس في أكاديمية سانت هيرست العسكرية لمدة عامين. (صح/خطأ)</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">صح</div>
+                        <div class="option" onclick="selectOption(this, false)">خطأ</div>
                     </div>
-                    <div class="question-card">
-                        <div class="question">درس السلطان قابوس في أكاديمية سانت هيرست العسكرية لمدة عامين. (صح/خطأ)</div>
-                        <div class="options">
-                            <div class="option" data-correct="true">صح</div>
-                            <div class="option" data-correct="false">خطأ</div>
-                        </div>
-                        <div class="feedback"></div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <!-- أزرار التنقل -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <div></div>
+                    <button onclick="showPage(1)" class="nav-button" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: none; padding: 15px 25px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                        الصفحة التالية (44) ←
+                    </button>
+                </div>
+            </section>
+            
+            <!-- صفحة 44 -->
+            <section class="page-section" id="page1">
+                <div class="text-box">
+                    <h3>النص الأصلي - صفحة 44:</h3>
+                    <p>شكّلت تلك المرحلة المحورية خبراته العسكرية، ثم درس مدة عام في مجال نظم الحكم المحلي، وأكمل دورات تخصصية في شؤون الإدارة وتنظيم الدول، ثم هيّأ له والده الفرصة ليقوم بجولة حول العالم، واستغرقت ثلاث سنوات، زار خلالها العديد من دول العالم، وعاد بعد ذلك إلى البلاد عام ١٣٨٣هـ الموافق ١٩٦٤م، فأقام في مدينة صلالة.</p>
+                    <p>وعلى امتداد السنوات الست التالية لعودته، تعمّق السلطان قابوس – طيب الله ثراه – في دراسة الدين الإسلامي، وكل ما يتصل بتاريخ عمان وحضارتها، وقد أشار في أحد أحاديثه إلى أن هذا التعليم العظيم ساعده على توسيع مداركه، ومسؤوليته تجاه شعبه العماني، والإنسانية عموماً. كما أنه استفاد كثيراً من التعليم الغربي الذي تلقاه، وحياته العسكرية، ونظام التعليم في بريطانيا، ثم كان لديه الفرصة خلال سنوات إقامته في صلالة لاستيعاب الكثير من الأفكار السياسية والفلسفية، للعديد من المفكرين في العالم.</p>
+                    <p>وفي الثالث والعشرين من شهر يوليو سنة ١٩٧٠م تولى السلطان قابوس – طيب الله ثراه – الحكم في سلطنة عمان، وشرع في اتخاذ الخطوات التي من شأنها وضع نظام جديد.</p>
+                    <p>ولعلّ اهتمام السلطان قابوس – طيب الله ثراه – بدفع عمان إلى حالة متقدمة من المعاصرة، مع الإبقاء على الأصول العمانية العربية، حيث لا يتعارض تقدّم عمان مع هويتها – هو الشيء الأبرز في سياساته – طيب الله ثراه – وقد وضع ذلك أثراً واضحاً في عمان.</p>
+                </div>
+                
+                <div class="section-title">أسئلة المعجم - الفقرة الأولى</div>
+                <div class="question-card">
+                    <div class="question">ما معنى "المحورية"؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">أ) الأساسية والمهمة</div>
+                        <div class="option" onclick="selectOption(this, false)">ب) الدائرية</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) الطويلة</div>
+                        <div class="option" onclick="selectOption(this, false)">د) الصعبة</div>
                     </div>
-                    <div class="navigation-buttons">
-                        <div></div>
-                        <button class="nav-button" data-next-page="1">
-                            الصفحة التالية (44) ←
-                        </button>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="section-title">أسئلة المعجم - الفقرة الثانية</div>
+                <div class="question-card">
+                    <div class="question">ما معنى "مداركه"؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">أ) أمواله</div>
+                        <div class="option" onclick="selectOption(this, true)">ب) معارفه وفهمه</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) أصدقاؤه</div>
+                        <div class="option" onclick="selectOption(this, false)">د) كتبه</div>
                     </div>
-                </section>
-
-                <!-- صفحة 44 -->
-                <section class="page-section" id="page1">
-                    <div class="text-box">
-                        <h3>النص الأصلي - صفحة 44:</h3>
-                        <p>
-                            شكّلت تلك المرحلة المحورية خبراته العسكرية، ثم درس مدة عام في مجال نظم الحكم المحلي، وأكمل دورات تخصصية في شؤون الإدارة وتنظيم الدول، ثم هيّأ له والده الفرصة ليقوم بجولة حول العالم، واستغرقت ثلاث سنوات، زار خلالها العديد من دول العالم، وعاد بعد ذلك إلى البلاد عام ١٣٨٣هـ الموافق ١٩٦٤م، فأقام في مدينة صلالة.
-                        </p>
-                        <p>
-                            وعلى امتداد السنوات الست التالية لعودته، تعمّق السلطان قابوس – طيب الله ثراه – في دراسة الدين الإسلامي، وكل ما يتصل بتاريخ عمان وحضارتها، وقد أشار في أحد أحاديثه إلى أن هذا التعليم العظيم ساعده على توسيع مداركه، ومسؤوليته تجاه شعبه العماني، والإنسانية عموماً. كما أنه استفاد كثيراً من التعليم الغربي الذي تلقاه، وحياته العسكرية، ونظام التعليم في بريطانيا، ثم كان لديه الفرصة خلال سنوات إقامته في صلالة لاستيعاب الكثير من الأفكار السياسية والفلسفية، للعديد من المفكرين في العالم.
-                        </p>
-                        <p>
-                            وفي الثالث والعشرين من شهر يوليو سنة ١٩٧٠م تولى السلطان قابوس – طيب الله ثراه – الحكم في سلطنة عمان، وشرع في اتخاذ الخطوات التي من شأنها وضع نظام جديد.
-                        </p>
-                        <p>
-                            ولعلّ اهتمام السلطان قابوس – طيب الله ثراه – بدفع عمان إلى حالة متقدمة من المعاصرة، مع الإبقاء على الأصول العمانية العربية، حيث لا يتعارض تقدّم عمان مع هويتها – هو الشيء الأبرز في سياساته – طيب الله ثراه – وقد وضع ذلك أثراً واضحاً في عمان.
-                        </p>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="section-title">أسئلة المعجم - الفقرة الرابعة</div>
+                <div class="question-card">
+                    <div class="question">ما معنى "المعاصرة"؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">أ) القديم</div>
+                        <div class="option" onclick="selectOption(this, true)">ب) الحداثة ومواكبة العصر</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) التقليد</div>
+                        <div class="option" onclick="selectOption(this, false)">د) الماضي</div>
                     </div>
-                    <div class="section-title">أسئلة المعجم - الفقرة الأولى</div>
-                    <div class="question-card">
-                        <div class="question">ما معنى "المحورية"؟</div>
-                        <div class="options">
-                            <div class="option" data-correct="true">أ) الأساسية والمهمة</div>
-                            <div class="option" data-correct="false">ب) الدائرية</div>
-                            <div class="option" data-correct="false">ج) الطويلة</div>
-                            <div class="option" data-correct="false">د) الصعبة</div>
-                        </div>
-                        <div class="feedback"></div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="section-title">أسئلة الفهم - اختيار متعدد</div>
+                <div class="question-card">
+                    <div class="question">ما الفكرة الرئيسية للفقرة الثالثة؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">أ) تعليم السلطان قابوس</div>
+                        <div class="option" onclick="selectOption(this, true)">ب) تولي السلطان قابوس الحكم</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) سفر السلطان قابوس</div>
+                        <div class="option" onclick="selectOption(this, false)">د) هوايات السلطان قابوس</div>
                     </div>
-                    <div class="section-title">أسئلة المعجم - الفقرة الثانية</div>
-                    <div class="question-card">
-                        <div class="question">ما معنى "مداركه"؟</div>
-                        <div class="options">
-                            <div class="option" data-correct="false">أ) أمواله</div>
-                            <div class="option" data-correct="true">ب) معارفه وفهمه</div>
-                            <div class="option" data-correct="false">ج) أصدقاؤه</div>
-                            <div class="option" data-correct="false">د) كتبه</div>
-                        </div>
-                        <div class="feedback"></div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="section-title">أسئلة الفهم - صح أم خطأ</div>
+                <div class="question-card">
+                    <div class="question">استغرقت جولة السلطان قابوس حول العالم ثلاث سنوات. (صح/خطأ)</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">صح</div>
+                        <div class="option" onclick="selectOption(this, false)">خطأ</div>
                     </div>
-                    <div class="section-title">أسئلة المعجم - الفقرة الرابعة</div>
-                    <div class="question-card">
-                        <div class="question">ما معنى "المعاصرة"؟</div>
-                        <div class="options">
-                            <div class="option" data-correct="false">أ) القديم</div>
-                            <div class="option" data-correct="true">ب) الحداثة ومواكبة العصر</div>
-                            <div class="option" data-correct="false">ج) التقليد</div>
-                            <div class="option" data-correct="false">د) الماضي</div>
-                        </div>
-                        <div class="feedback"></div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">تولى السلطان قابوس الحكم في عام ١٩٧٠م. (صح/خطأ)</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">صح</div>
+                        <div class="option" onclick="selectOption(this, false)">خطأ</div>
                     </div>
-                    <div class="section-title">أسئلة الفهم - اختيار متعدد</div>
-                    <div class="question-card">
-                        <div class="question">ما الفكرة الرئيسية للفقرة الثالثة؟</div>
-                        <div class="options">
-                            <div class="option" data-correct="false">أ) تعليم السلطان قابوس</div>
-                            <div class="option" data-correct="true">ب) تولي السلطان قابوس الحكم</div>
-                            <div class="option" data-correct="false">ج) سفر السلطان قابوس</div>
-                            <div class="option" data-correct="false">د) هوايات السلطان قابوس</div>
-                        </div>
-                        <div class="feedback"></div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <!-- أزرار التنقل -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <button onclick="showPage(0)" class="nav-button" style="background: linear-gradient(135deg, #6c757d 0%, #495057 100%); color: white; border: none; padding: 15px 25px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                        → الصفحة السابقة (43)
+                    </button>
+                    <button onclick="showPage(2)" class="nav-button" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: none; padding: 15px 25px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                        الصفحة التالية (45) ←
+                    </button>
+                </div>
+            </section>
+            
+            <!-- صفحة 45 -->
+            <section class="page-section" id="page2">
+                <div class="text-box">
+                    <h3>النص الأصلي - صفحة 45:</h3>
+                    <p>موسوعة السلطان قابوس للأسماء العربية، ودعم مشروعات علوم البيئة والتعليمية، سواء في السلطنة أو خارجها، فضلاً عن جائزته السنوية التي أطلقها السلطان قابوس لخدمات البيئة، والتي تقدّم كل عامين من خلال منظمة اليونسكو، وإضافة إلى دعمه لمشروع دراسة طرق الحرير، والتنمية العربية وغيرها.</p>
+                    <p>وعن هواياته، تحدّث السلطان قابوس – طيب الله ثراه – فقال: "إنّه منذ طفولته أحبّ الموسيقى، وركوب الخيل؛ حيث ذكر أنه قد وُضع على ظهر حصان وهو في الرابعة من عمره، كما أن الرماية أيضاً من الهوايات المحببة إليه، كونها تدرّب على الصبر، وكانت جزءاً مهمّاً من حياته العسكرية، ويعيش في مجتمع كالمجتمع العماني الذي يعتزّ بتاريخه المجيد.</p>
+                    <p>ومن هوايات السلطان قابوس – طيب الله ثراه – أيضاً المشي، فقد أحب المشي منذ الصغر، حيث كان يقضي وقتاً في المشي على شاطئ البحر، وهي رياضة جيدة للجسم، وفرصة للتفكير في شؤون الدولة. كذلك كانت لديه هواية التصوير ورسم المناظر الطبيعية.</p>
+                    <p>ومن الهوايات المحببة لدى السلطان قابوس – طيب الله ثراه – أيضاً قراءة الكتب، ومراقبة الكواكب، إذ كان يملك مكتبة كبيرة، يقضي فيها بعض الوقت في قراءة هذه الكتب، وأحب متابعة الأخبار، وكذلك الألعاب الرياضية.</p>
+                    <p>توفي – طيب الله ثراه – يوم الجمعة ١٥ من جمادى الأولى ١٤٤١هـ الموافق ١٠ يناير ٢٠٢٠م، وخلفه في الحكم صاحب الجلالة السلطان هيثم بن طارق المعظم – حفظه الله – يوم السبت ١١ من جمادى الأولى ١٤٤١هـ الموافق ١١ من يناير ٢٠٢٠م.</p>
+                </div>
+                
+                <div class="section-title">أسئلة المعجم - الفقرة الأولى</div>
+                <div class="question-card">
+                    <div class="question">ما معنى "فضلاً عن"؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">أ) بدلاً من</div>
+                        <div class="option" onclick="selectOption(this, true)">ب) إضافة إلى</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) بسبب</div>
+                        <div class="option" onclick="selectOption(this, false)">د) رغم</div>
                     </div>
-                    <div class="section-title">أسئلة الفهم - صح أم خطأ</div>
-                    <div class="question-card">
-                        <div class="question">استغرقت جولة السلطان قابوس حول العالم ثلاث سنوات. (صح/خطأ)</div>
-                        <div class="options">
-                            <div class="option" data-correct="true">صح</div>
-                            <div class="option" data-correct="false">خطأ</div>
-                        </div>
-                        <div class="feedback"></div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="section-title">أسئلة المعجم - الفقرة الثانية</div>
+                <div class="question-card">
+                    <div class="question">ما معنى "المحببة"؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">أ) المفضلة والمرغوبة</div>
+                        <div class="option" onclick="selectOption(this, false)">ب) الصعبة</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) الجديدة</div>
+                        <div class="option" onclick="selectOption(this, false)">د) القديمة</div>
                     </div>
-                    <div class="question-card">
-                        <div class="question">تولى السلطان قابوس الحكم في عام ١٩٧٠م. (صح/خطأ)</div>
-                        <div class="options">
-                            <div class="option" data-correct="true">صح</div>
-                            <div class="option" data-correct="false">خطأ</div>
-                        </div>
-                        <div class="feedback"></div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="section-title">أسئلة الفهم - اختيار متعدد</div>
+                <div class="question-card">
+                    <div class="question">ما الفكرة الرئيسية للفقرة الثانية؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">أ) هوايات السلطان قابوس المختلفة</div>
+                        <div class="option" onclick="selectOption(this, false)">ب) تعليم السلطان قابوس</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) مشاريع السلطان قابوس</div>
+                        <div class="option" onclick="selectOption(this, false)">د) وفاة السلطان قابوس</div>
                     </div>
-                    <div class="navigation-buttons">
-                        <button class="nav-button" data-prev-page="0">
-                            ← الصفحة السابقة (43)
-                        </button>
-                        <button class="nav-button" data-next-page="2">
-                            الصفحة التالية (45) ←
-                        </button>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">ما الفكرة الرئيسية للفقرة الأخيرة؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">أ) هوايات السلطان قابوس</div>
+                        <div class="option" onclick="selectOption(this, false)">ب) مشاريع السلطان قابوس</div>
+                        <div class="option" onclick="selectOption(this, true)">ج) وفاة السلطان قابوس وخلافته</div>
+                        <div class="option" onclick="selectOption(this, false)">د) تعليم السلطان قابوس</div>
                     </div>
-                </section>
-
-                <!-- صفحة 45 -->
-                <section class="page-section" id="page2">
-                    <div class="text-box">
-                        <h3>النص الأصلي - صفحة 45:</h3>
-                        <p>
-                            موسوعة السلطان قابوس للأسماء العربية، ودعم مشروعات علوم البيئة والتعليمية، سواء في السلطنة أو خارجها، فضلاً عن جائزته السنوية التي أطلقها السلطان قابوس لخدمات البيئة، والتي تقدّم كل عامين من خلال منظمة اليونسكو، وإضافة إلى دعمه لمشروع دراسة طرق الحرير، والتنمية العربية وغيرها.
-                        </p>
-                        <p>
-                            وعن هواياته، تحدّث السلطان قابوس – طيب الله ثراه – فقال: "إنّه منذ طفولته أحبّ الموسيقى، وركوب الخيل؛ حيث ذكر أنه قد وُضع على ظهر حصان وهو في الرابعة من عمره، كما أن الرماية أيضاً من الهوايات المحببة إليه، كونها تدرّب على الصبر، وكانت جزءاً مهمّاً من حياته العسكرية، ويعيش في مجتمع كالمجتمع العماني الذي يعتزّ بتاريخه المجيد.
-                        </p>
-                        <p>
-                            ومن هوايات السلطان قابوس – طيب الله ثراه – أيضاً المشي، فقد أحب المشي منذ الصغر، حيث كان يقضي وقتاً في المشي على شاطئ البحر، وهي رياضة جيدة للجسم، وفرصة للتفكير في شؤون الدولة. كذلك كانت لديه هواية التصوير ورسم المناظر الطبيعية.
-                        </p>
-                        <p>
-                            ومن الهوايات المحببة لدى السلطان قابوس – طيب الله ثراه – أيضاً قراءة الكتب، ومراقبة الكواكب، إذ كان يملك مكتبة كبيرة، يقضي فيها بعض الوقت في قراءة هذه الكتب، وأحب متابعة الأخبار، وكذلك الألعاب الرياضية.
-                        </p>
-                        <p>
-                            توفي – طيب الله ثراه – يوم الجمعة ١٥ من جمادى الأولى ١٤٤١هـ الموافق ١٠ يناير ٢٠٢٠م، وخلفه في الحكم صاحب الجلالة السلطان هيثم بن طارق المعظم – حفظه الله – يوم السبت ١١ من جمادى الأولى ١٤٤١هـ الموافق ١١ من يناير ٢٠٢٠م.
-                        </p>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="section-title">أسئلة الفهم - صح أم خطأ</div>
+                <div class="question-card">
+                    <div class="question">كان السلطان قابوس يحب ركوب الخيل منذ طفولته. (صح/خطأ)</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">صح</div>
+                        <div class="option" onclick="selectOption(this, false)">خطأ</div>
                     </div>
-                    <div class="section-title">أسئلة المعجم - الفقرة الأولى</div>
-                    <div class="question-card">
-                        <div class="question">ما معنى "فضلاً عن"؟</div>
-                        <div class="options">
-                            <div class="option" data-correct="false">أ) بدلاً من</div>
-                            <div class="option" data-correct="true">ب) إضافة إلى</div>
-                            <div class="option" data-correct="false">ج) بسبب</div>
-                            <div class="option" data-correct="false">د) رغم</div>
-                        </div>
-                        <div class="feedback"></div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">خلف السلطان هيثم بن طارق السلطان قابوس في الحكم. (صح/خطأ)</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">صح</div>
+                        <div class="option" onclick="selectOption(this, false)">خطأ</div>
                     </div>
-                    <div class="section-title">أسئلة المعجم - الفقرة الثانية</div>
-                    <div class="question-card">
-                        <div class="question">ما معنى "المحببة"؟</div>
-                        <div class="options">
-                            <div class="option" data-correct="true">أ) المفضلة والمرغوبة</div>
-                            <div class="option" data-correct="false">ب) الصعبة</div>
-                            <div class="option" data-correct="false">ج) الجديدة</div>
-                            <div class="option" data-correct="false">د) القديمة</div>
-                        </div>
-                        <div class="feedback"></div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">اختر الإجابة الصحيحة: متى توفي السلطان قابوس؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">أ) ١٠ يناير ٢٠١٩م</div>
+                        <div class="option" onclick="selectOption(this, true)">ب) ١٠ يناير ٢٠٢٠م</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) ١١ يناير ٢٠٢٠م</div>
+                        <div class="option" onclick="selectOption(this, false)">د) ١٥ يناير ٢٠٢٠م</div>
                     </div>
-                    <div class="section-title">أسئلة الفهم - اختيار متعدد</div>
-                    <div class="question-card">
-                        <div class="question">ما الفكرة الرئيسية للفقرة الثانية؟</div>
-                        <div class="options">
-                            <div class="option" data-correct="true">أ) هوايات السلطان قابوس المختلفة</div>
-                            <div class="option" data-correct="false">ب) تعليم السلطان قابوس</div>
-                            <div class="option" data-correct="false">ج) مشاريع السلطان قابوس</div>
-                            <div class="option" data-correct="false">د) وفاة السلطان قابوس</div>
-                        </div>
-                        <div class="feedback"></div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <!-- أزرار التنقل -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <button onclick="showPage(1)" class="nav-button" style="background: linear-gradient(135deg, #6c757d 0%, #495057 100%); color: white; border: none; padding: 15px 25px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                        → الصفحة السابقة (44)
+                    </button>
+                    <div style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); color: white; padding: 15px 25px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; display: flex; align-items: center; gap: 8px;">
+                        🏁 الصفحة الأخيرة
                     </div>
-                    <div class="question-card">
-                        <div class="question">ما الفكرة الرئيسية للفقرة الأخيرة؟</div>
-                        <div class="options">
-                            <div class="option" data-correct="false">أ) هوايات السلطان قابوس</div>
-                            <div class="option" data-correct="false">ب) مشاريع السلطان قابوس</div>
-                            <div class="option" data-correct="true">ج) وفاة السلطان قابوس وخلافته</div>
-                            <div class="option" data-correct="false">د) تعليم السلطان قابوس</div>
-                        </div>
-                        <div class="feedback"></div>
-                    </div>
-                    <div class="section-title">أسئلة الفهم - صح أم خطأ</div>
-                    <div class="question-card">
-                        <div class="question">كان السلطان قابوس يحب ركوب الخيل منذ طفولته. (صح/خطأ)</div>
-                        <div class="options">
-                            <div class="option" data-correct="true">صح</div>
-                            <div class="option" data-correct="false">خطأ</div>
-                        </div>
-                        <div class="feedback"></div>
-                    </div>
-                    <div class="question-card">
-                        <div class="question">خلف السلطان هيثم بن طارق السلطان قابوس في الحكم. (صح/خطأ)</div>
-                        <div class="options">
-                            <div class="option" data-correct="true">صح</div>
-                            <div class="option" data-correct="false">خطأ</div>
-                        </div>
-                        <div class="feedback"></div>
-                    </div>
-                    <div class="question-card">
-                        <div class="question">اختر الإجابة الصحيحة: متى توفي السلطان قابوس؟</div>
-                        <div class="options">
-                            <div class="option" data-correct="false">أ) ١٠ يناير ٢٠١٩م</div>
-                            <div class="option" data-correct="true">ب) ١٠ يناير ٢٠٢٠م</div>
-                            <div class="option" data-correct="false">ج) ١١ يناير ٢٠٢٠م</div>
-                            <div class="option" data-correct="false">د) ١٥ يناير ٢٠٢٠م</div>
-                        </div>
-                        <div class="feedback"></div>
-                    </div>
-                    <div class="navigation-buttons">
-                        <button class="nav-button" data-prev-page="1">
-                            ← الصفحة السابقة (44)
-                        </button>
-                        <div class="final-page-indicator">
-                            🏁 الصفحة الأخيرة
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- صفحة النتائج النهائية -->
-            <div class="final-results-page" id="finalResultsPage" style="display: none;">
-                <div class="results-title">🎉 تهانينا! لقد أنهيت جميع الأسئلة</div>
+                </div>
+            </section>
+        </div>
+        
+            <!-- صندوق النتائج النهائية -->
+            <div class="final-results" id="finalResults">
+                <div class="results-title">📊 نتائج <span id="resultStudentName"></span></div>
+                
                 <div class="student-result-info">
-                    <p><strong>الطالب:</strong> <span id="finalResultStudentName"></span></p>
-                    <p><strong>الصف:</strong> <span id="finalResultStudentClass"></span></p>
+                    <p><strong>الطالب:</strong> <span id="resultStudentNameFull"></span></p>
+                    <p><strong>الصف:</strong> <span id="resultStudentClass"></span></p>
                 </div>
-                <div class="percentage-circle" id="finalPercentageCircle">
-                    <div class="percentage-inner" id="finalPercentageText">0%</div>
+                
+                <div class="percentage-circle" id="percentageCircle">
+                    <div class="percentage-inner" id="percentageText">0%</div>
                 </div>
+                
                 <div class="results-grid">
                     <div class="result-card">
-                        <div class="result-number" id="finalCorrectAnswers">0</div>
+                        <div class="result-number" id="correctAnswers">0</div>
                         <div class="result-label">إجابات صحيحة</div>
                     </div>
+                    
                     <div class="result-card">
-                        <div class="result-number" id="finalWrongAnswers">0</div>
+                        <div class="result-number" id="wrongAnswers">0</div>
                         <div class="result-label">إجابات خاطئة</div>
                     </div>
+                    
                     <div class="result-card">
-                        <div class="result-number" id="finalTotalAnswered">0</div>
-                        <div class="result-label">إجمالي الأسئلة</div>
+                        <div class="result-number" id="totalAnswered">0</div>
+                        <div class="result-label">إجمالي الأسئلة المجابة</div>
                     </div>
                 </div>
-                <div class="performance-message" id="finalPerformanceMessage">
-                    ممتاز! لقد أكملت جميع الأسئلة
+                
+                <div class="performance-message" id="performanceMessage">
+                    ابدأ في حل الأسئلة لترى نتائجك هنا!
                 </div>
-                <div class="final-actions">
-                    <button class="action-button" id="sendResultsBtn">
-                        📤 إرسال النتائج
+            </div>
+            
+            <!-- اسم المعد -->
+            <div class="author-name">
+                إعداد الأستاذ خليل البلوشي
+            </div>
+        </div>
+        
+        <!-- صفحة النتائج الختامية -->
+        <div class="final-results-page" id="finalResultsPage" style="display: none;">
+            <div class="results-title">🎉 تهانينا! لقد أنهيت جميع الأسئلة</div>
+            
+            <div class="student-result-info">
+                <p><strong>الطالب:</strong> <span id="finalResultStudentName"></span></p>
+                <p><strong>الصف:</strong> <span id="finalResultStudentClass"></span></p>
+            </div>
+            
+            <div class="percentage-circle" id="finalPercentageCircle">
+                <div class="percentage-inner" id="finalPercentageText">0%</div>
+            </div>
+            
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-number" id="finalCorrectAnswers">0</div>
+                    <div class="result-label">إجابات صحيحة</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-number" id="finalWrongAnswers">0</div>
+                    <div class="result-label">إجابات خاطئة</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-number" id="finalTotalAnswered">0</div>
+                    <div class="result-label">إجمالي الأسئلة</div>
+                </div>
+            </div>
+            
+            <div class="performance-message" id="finalPerformanceMessage">
+                ممتاز! لقد أكملت جميع الأسئلة
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px; color: white;">📤 إرسال النتيجة للمعلم</h3>
+                    
+                    <button onclick="showWhatsAppForm()" style="background: #25D366; color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin: 10px; display: inline-flex; align-items: center; gap: 8px;">
+                        📱 إرسال عبر الواتساب
                     </button>
-                    <button class="action-button" id="showCorrectAnswersBtn">
-                        📋 عرض الإجابات الصحيحة
+                    
+                    <button onclick="sendResultsByEmail()" style="background: #EA4335; color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin: 10px; display: inline-flex; align-items: center; gap: 8px;">
+                        📧 إرسال عبر البريد الإلكتروني
                     </button>
-                    <button class="action-button" id="restartQuizBtn">
-                        🔄 إعادة المحاولة
-                    </button>
+                </div>
+                
+                <button onclick="showAllCorrectAnswersFromResults()" style="background: #007bff; color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin: 10px;">
+                    📋 عرض الإجابات الصحيحة
+                </button>
+                <button onclick="restartQuiz()" style="background: #28a745; color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin: 10px;">
+                    🔄 إعادة المحاولة
+                </button>
+            </div>
+            
+            <!-- نموذج إدخال رقم الواتساب -->
+            <div id="whatsappModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center;">
+                <div style="background: white; padding: 30px; border-radius: 15px; max-width: 400px; width: 90%; text-align: center;">
+                    <h3 style="color: #2c3e50; margin-bottom: 20px;">📱 إرسال النتيجة عبر الواتساب</h3>
+                    
+                    <div style="margin-bottom: 20px; text-align: right;">
+                        <label for="teacherWhatsApp" style="display: block; margin-bottom: 8px; color: #2c3e50; font-weight: bold;">رقم واتساب المعلم:</label>
+                        <input type="tel" id="teacherWhatsApp" placeholder="مثال: 96896547890" style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem; text-align: center; box-sizing: border-box;" dir="ltr">
+                        <small style="color: #6c757d; display: block; margin-top: 5px;">أدخل الرقم مع رمز الدولة (بدون +)</small>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; justify-content: center;">
+                        <button onclick="sendWhatsAppMessage()" style="background: #25D366; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+                            📱 إرسال
+                        </button>
+                        <button onclick="closeWhatsAppModal()" style="background: #6c757d; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+                            إلغاء
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- اسم المعد -->
-        <div class="author-name">
-            إعداد الأستاذ خليل البلوشي
-        </div>
     </main>
-
+    
     <script>
-        // كائن التطبيق الرئيسي
-        const QuizApp = {
-            // حالة التطبيق
-            state: {
-                score: 0,
-                totalQuestions: 0,
-                wrongAnswers: 0,
-                studentName: '',
-                studentClass: '',
-                answeredQuestions: new Set(),
-                totalQuestionCount: 0
-            },
-
-            // تهيئة التطبيق
-            init() {
-                this.cacheElements();
-                this.bindEvents();
-                this.countTotalQuestions();
-                this.loadProgress();
-            },
-
-            // تخزين العناصر
-            cacheElements() {
-                this.elements = {
-                    loginScreen: document.getElementById('loginScreen'),
-                    quizContent: document.getElementById('quizContent'),
-                    scoreDisplay: document.getElementById('scoreDisplay'),
-                    progressIndicator: document.getElementById('progressIndicator'),
-                    studentForm: document.getElementById('studentForm'),
-                    score: document.getElementById('score'),
-                    progress: document.getElementById('progress'),
-                    displayStudentName: document.getElementById('displayStudentName'),
-                    displayStudentClass: document.getElementById('displayStudentClass'),
-                    finalResultsPage: document.getElementById('finalResultsPage'),
-                    finalCorrectAnswers: document.getElementById('finalCorrectAnswers'),
-                    finalWrongAnswers: document.getElementById('finalWrongAnswers'),
-                    finalTotalAnswered: document.getElementById('finalTotalAnswered'),
-                    finalResultStudentName: document.getElementById('finalResultStudentName'),
-                    finalResultStudentClass: document.getElementById('finalResultStudentClass'),
-                    finalPercentageCircle: document.getElementById('finalPercentageCircle'),
-                    finalPercentageText: document.getElementById('finalPercentageText'),
-                    finalPerformanceMessage: document.getElementById('finalPerformanceMessage'),
-                    sendResultsBtn: document.getElementById('sendResultsBtn'),
-                    showCorrectAnswersBtn: document.getElementById('showCorrectAnswersBtn'),
-                    restartQuizBtn: document.getElementById('restartQuizBtn')
-                };
-            },
-
-            // ربط الأحداث
-            bindEvents() {
-                // نموذج تسجيل الطالب
-                this.elements.studentForm.addEventListener('submit', (e) => this.startQuiz(e));
-
-                // أزرار التنقل بين الصفحات
-                document.querySelectorAll('.nav-button[data-next-page]').forEach(btn => {
-                    btn.addEventListener('click', () => this.showPage(parseInt(btn.dataset.nextPage)));
-                });
-
-                document.querySelectorAll('.nav-button[data-prev-page]').forEach(btn => {
-                    btn.addEventListener('click', () => this.showPage(parseInt(btn.dataset.prevPage)));
-                });
-
-                // أزرار التبويب
-                document.querySelectorAll('.tab').forEach(tab => {
-                    tab.addEventListener('click', () => this.showPage(parseInt(tab.dataset.page)));
-                });
-
-                // اختيار الإجابات
-                document.querySelectorAll('.option').forEach(option => {
-                    option.addEventListener('click', () => this.selectOption(option));
-                });
-
-                // أزرار صفحة النتائج
-                this.elements.sendResultsBtn.addEventListener('click', () => this.sendResults());
-                this.elements.showCorrectAnswersBtn.addEventListener('click', () => this.showAllCorrectAnswersFromResults());
-                this.elements.restartQuizBtn.addEventListener('click', () => this.restartQuiz());
-
-                // حفظ التقدم عند إغلاق الصفحة
-                window.addEventListener('beforeunload', () => this.saveProgress());
-            },
-
-            // عد الأسئلة الكلية
-            countTotalQuestions() {
-                this.state.totalQuestionCount = document.querySelectorAll('.question-card').length;
-            },
-
-            // بدء الاختبار
-            startQuiz(event) {
-                event.preventDefault();
-                
-                this.state.studentName = document.getElementById('studentName').value.trim();
-                this.state.studentClass = document.getElementById('studentClass').value;
-
-                if (!this.state.studentName || !this.state.studentClass) {
-                    alert('يرجى إدخال جميع البيانات المطلوبة');
-                    return;
-                }
-
-                this.elements.loginScreen.style.display = 'none';
-                this.elements.quizContent.style.display = 'block';
-                this.elements.scoreDisplay.style.display = 'block';
-                this.elements.progressIndicator.style.display = 'block';
-
-                this.elements.displayStudentName.textContent = this.state.studentName;
-                this.elements.displayStudentClass.textContent = this.state.studentClass;
-
-                this.updateProgress();
-                this.saveProgress();
-            },
-
-            // عرض صفحة معينة
-            showPage(pageIndex) {
-                const pages = document.querySelectorAll('.page-section');
-                pages.forEach(page => page.classList.remove('active'));
-                document.getElementById(`page${pageIndex}`).classList.add('active');
-
-                const tabs = document.querySelectorAll('.tab');
-                tabs.forEach(tab => tab.classList.remove('active'));
-                tabs[pageIndex].classList.add('active');
-
-                this.saveProgress();
-            },
-
-            // اختيار إجابة
-            selectOption(element) {
-                const questionCard = element.closest('.question-card');
-                const questionId = this.getQuestionId(questionCard);
-
-                if (this.state.answeredQuestions.has(questionId)) {
-                    return;
-                }
-
-                const isCorrect = element.dataset.correct === 'true';
-                const options = questionCard.querySelectorAll('.option');
-                const feedback = questionCard.querySelector('.feedback');
-
-                options.forEach(opt => {
-                    opt.classList.remove('selected');
-                    opt.style.pointerEvents = 'none';
-                });
-
-                element.classList.add('selected');
-
-                if (isCorrect) {
-                    this.state.score++;
-                    feedback.textContent = '✅ إجابة صحيحة! أحسنت';
-                    feedback.className = 'feedback correct';
-                } else {
-                    this.state.wrongAnswers++;
-                    feedback.textContent = '❌ إجابة خاطئة.';
-                    feedback.className = 'feedback incorrect';
-                }
-
-                this.state.answeredQuestions.add(questionId);
-                this.state.totalQuestions++;
-                
-                this.elements.score.textContent = `${this.state.score}/${this.state.totalQuestions}`;
-                feedback.style.display = 'block';
-
-                this.updateProgress();
-                this.saveProgress();
-                this.checkIfAllQuestionsComplete();
-            },
-
-            // الحصول على معرف السؤال
-            getQuestionId(questionCard) {
-                const page = questionCard.closest('.page-section');
-                const pageIndex = Array.from(page.parentNode.children).indexOf(page);
-                const questionIndex = Array.from(page.querySelectorAll('.question-card')).indexOf(questionCard);
-                return `page${pageIndex}-question${questionIndex}`;
-            },
-
-            // تحديث شريط التقدم
-            updateProgress() {
-                const progress = this.state.totalQuestionCount > 0 ? 
-                    Math.round((this.state.answeredQuestions.size / this.state.totalQuestionCount) * 100) : 0;
-                this.elements.progress.textContent = progress;
-            },
-
-            // التحقق من اكتمال جميع الأسئلة
-            checkIfAllQuestionsComplete() {
-                if (this.state.answeredQuestions.size === this.state.totalQuestionCount && this.state.totalQuestionCount > 0) {
-                    setTimeout(() => this.showFinalResultsPage(), 1000);
-                }
-            },
-
-            // عرض صفحة النتائج النهائية
-            showFinalResultsPage() {
-                this.elements.quizContent.style.display = 'none';
-                this.elements.scoreDisplay.style.display = 'none';
-                this.elements.progressIndicator.style.display = 'none';
-                this.elements.finalResultsPage.style.display = 'block';
-
-                const percentage = this.state.totalQuestions > 0 ? 
-                    Math.round((this.state.score / this.state.totalQuestions) * 100) : 0;
-                
-                this.elements.finalPercentageCircle.style.setProperty('--percentage', `${percentage * 3.6}deg`);
-                this.elements.finalPercentageText.textContent = `${percentage}%`;
-
-                this.elements.finalCorrectAnswers.textContent = this.state.score;
-                this.elements.finalWrongAnswers.textContent = this.state.wrongAnswers;
-                this.elements.finalTotalAnswered.textContent = this.state.totalQuestions;
-                this.elements.finalResultStudentName.textContent = this.state.studentName;
-                this.elements.finalResultStudentClass.textContent = this.state.studentClass;
-
-                this.setPerformanceMessage(percentage);
-                this.clearProgress();
-            },
-
-            // تعيين رسالة الأداء
-            setPerformanceMessage(percentage) {
-                const performanceMessage = this.elements.finalPerformanceMessage;
-                const firstName = this.state.studentName.split(' ')[0];
-                
-                if (percentage >= 90) {
-                    performanceMessage.textContent = `🌟 ممتاز ${firstName}! أداء رائع جداً!`;
-                    performanceMessage.style.background = 'rgba(40, 167, 69, 0.3)';
-                } else if (percentage >= 80) {
-                    performanceMessage.textContent = `👏 جيد جداً ${firstName}! استمر في التقدم!`;
-                    performanceMessage.style.background = 'rgba(40, 167, 69, 0.2)';
-                } else if (percentage >= 70) {
-                    performanceMessage.textContent = `👍 جيد ${firstName}! يمكنك تحسين أدائك أكثر!`;
-                    performanceMessage.style.background = 'rgba(255, 193, 7, 0.3)';
-                } else if (percentage >= 60) {
-                    performanceMessage.textContent = `📚 مقبول ${firstName}، لكن تحتاج لمزيد من المراجعة!`;
-                    performanceMessage.style.background = 'rgba(255, 193, 7, 0.2)';
-                } else {
-                    performanceMessage.textContent = `💪 لا تستسلم ${firstName}! راجع المادة وحاول مرة أخرى!`;
-                    performanceMessage.style.background = 'rgba(220, 53, 69, 0.3)';
-                }
-            },
-
-            // عرض جميع الإجابات الصحيحة
-            showAllCorrectAnswersFromResults() {
-                this.elements.finalResultsPage.style.display = 'none';
-                this.elements.quizContent.style.display = 'block';
-
-                document.querySelectorAll('.question-card').forEach(questionCard => {
-                    const options = questionCard.querySelectorAll('.option');
-                    options.forEach(option => {
-                        if (option.dataset.correct === 'true') {
-                            option.classList.add('correct');
-                        }
-                    });
-                });
-
-                this.showNotification('📋 تم عرض جميع الإجابات الصحيحة! يمكنك الآن مراجعة إجاباتك في جميع الأقسام');
-            },
-
-            // إعادة بدء الاختبار
-            restartQuiz() {
-                this.clearProgress();
-                window.location.reload();
-            },
-
-            // إرسال النتائج
-            sendResults() {
-                const percentage = this.state.totalQuestions > 0 ? 
-                    Math.round((this.state.score / this.state.totalQuestions) * 100) : 0;
-                
-                let performanceLevel = '';
-                if (percentage >= 90) performanceLevel = 'ممتاز 🌟';
-                else if (percentage >= 80) performanceLevel = 'جيد جداً 👏';
-                else if (percentage >= 70) performanceLevel = 'جيد 👍';
-                else if (percentage >= 60) performanceLevel = 'مقبول 📚';
-                else performanceLevel = 'يحتاج تحسين 💪';
-
-                const message = `📊 نتائج الطالب في أسئلة السلطان قابوس
-
-👤 اسم الطالب: ${this.state.studentName}
-🏫 الشعبة: ${this.state.studentClass}
-📈 النتائج:
-✅ الإجابات الصحيحة: ${this.state.score}
-❌ الإجابات الخاطئة: ${this.state.wrongAnswers}
-📝 إجمالي الأسئلة: ${this.state.totalQuestions}
-🎯 النسبة المئوية: ${percentage}%
-📊 التقييم: ${performanceLevel}
-تم إنجاز الاختبار بتاريخ: ${new Date().toLocaleDateString('ar-SA')}`;
-
-                const choice = confirm("اختر طريقة إرسال النتائج:\n\n- موافق: واتساب\n- إلغاء: البريد الإلكتروني (omk456456@gmail.com)");
-
-                if (choice) {
-                    // واتساب
-                    const encodedMessage = encodeURIComponent(message);
-                    const teacherNumber = prompt("أدخل رقم هاتف المعلم (مع مفتاح الدولة، مثل 96812345678):", "968");
-                    if (teacherNumber) {
-                        window.open(`https://wa.me/${teacherNumber}?text=${encodedMessage}`, '_blank');
-                    }
-                } else {
-                    // البريد الإلكتروني
-                    const email = "omk456456@gmail.com";
-                    window.open(`mailto:${email}?subject=نتائج اختبار السلطان قابوس - ${this.state.studentName}&body=${encodeURIComponent(message)}`, '_blank');
-                }
-
-                this.showNotification("تم فتح تطبيق الإرسال!");
-            },
-
-            // عرض إشعار
-            showNotification(message) {
-                const notification = document.createElement('div');
-                notification.textContent = message;
-                notification.style.cssText = `
+        let score = 0;
+        let totalQuestions = 0;
+        let wrongAnswers = 0;
+        let studentName = '';
+        let studentClass = '';
+        
+        function startQuiz(event) {
+            event.preventDefault();
+            
+            // الحصول على بيانات الطالب
+            studentName = document.getElementById('studentName').value.trim();
+            studentClass = document.getElementById('studentClass').value;
+            
+            if (!studentName || !studentClass) {
+                // إنشاء رسالة تنبيه مخصصة
+                const alertDiv = document.createElement('div');
+                alertDiv.textContent = 'يرجى إدخال جميع البيانات المطلوبة';
+                alertDiv.style.cssText = `
                     position: fixed;
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
-                    background: #28a745;
+                    background: #dc3545;
                     color: white;
                     padding: 15px 25px;
                     border-radius: 8px;
                     z-index: 10000;
                     font-weight: bold;
-                    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
                 `;
-                document.body.appendChild(notification);
-                setTimeout(() => notification.remove(), 3000);
-            },
+                document.body.appendChild(alertDiv);
+                setTimeout(() => alertDiv.remove(), 3000);
+                return;
+            }
+            
+            // إخفاء واجهة التسجيل وإظهار الأسئلة
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('quizContent').style.display = 'block';
+            document.getElementById('scoreDisplay').style.display = 'block';
+            
+            // عرض بيانات الطالب
+            document.getElementById('displayStudentName').textContent = studentName;
+            document.getElementById('displayStudentClass').textContent = studentClass;
+            
+            // تحديث النتائج النهائية
+            updateFinalResults();
+        }
+        
+        function showPage(pageIndex) {
+            // إخفاء جميع الصفحات
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // إظهار الصفحة المحددة
+            document.getElementById(`page${pageIndex}`).classList.add('active');
+            
+            // تحديث التبويبات
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            tabs[pageIndex].classList.add('active');
+        }
+        
+        function updateFinalResults() {
+            // هذه الوظيفة لم تعد تحدث النتائج المرئية، فقط تحفظ البيانات
+        }
+        
+        function showFinalResultsPage() {
+            // إخفاء محتوى الأسئلة
+            document.getElementById('quizContent').style.display = 'none';
+            document.getElementById('scoreDisplay').style.display = 'none';
+            
+            // إظهار صفحة النتائج الختامية
+            document.getElementById('finalResultsPage').style.display = 'block';
+            
+            // حساب النسبة المئوية
+            const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+            
+            // تحديث النسبة المئوية في الدائرة
+            const percentageCircle = document.getElementById('finalPercentageCircle');
+            const percentageText = document.getElementById('finalPercentageText');
+            percentageCircle.style.setProperty('--percentage', `${percentage * 3.6}deg`);
+            percentageText.textContent = `${percentage}%`;
+            
+            // تحديث الأرقام
+            document.getElementById('finalCorrectAnswers').textContent = score;
+            document.getElementById('finalWrongAnswers').textContent = wrongAnswers;
+            document.getElementById('finalTotalAnswered').textContent = totalQuestions;
+            
+            // تحديث بيانات الطالب في النتائج
+            document.getElementById('finalResultStudentName').textContent = studentName;
+            document.getElementById('finalResultStudentClass').textContent = studentClass;
+            
+            // تحديث رسالة الأداء
+            const performanceMessage = document.getElementById('finalPerformanceMessage');
+            if (percentage >= 90) {
+                performanceMessage.textContent = `🌟 ممتاز ${studentName.split(' ')[0]}! أداء رائع جداً!`;
+                performanceMessage.style.background = 'rgba(40, 167, 69, 0.3)';
+            } else if (percentage >= 80) {
+                performanceMessage.textContent = `👏 جيد جداً ${studentName.split(' ')[0]}! استمر في التقدم!`;
+                performanceMessage.style.background = 'rgba(40, 167, 69, 0.2)';
+            } else if (percentage >= 70) {
+                performanceMessage.textContent = `👍 جيد ${studentName.split(' ')[0]}! يمكنك تحسين أدائك أكثر!`;
+                performanceMessage.style.background = 'rgba(255, 193, 7, 0.3)';
+            } else if (percentage >= 60) {
+                performanceMessage.textContent = `📚 مقبول ${studentName.split(' ')[0]}، لكن تحتاج لمزيد من المراجعة!`;
+                performanceMessage.style.background = 'rgba(255, 193, 7, 0.2)';
+            } else {
+                performanceMessage.textContent = `💪 لا تستسلم ${studentName.split(' ')[0]}! راجع المادة وحاول مرة أخرى!`;
+                performanceMessage.style.background = 'rgba(220, 53, 69, 0.3)';
+            }
+        }
+        
+        function selectOption(element, isCorrect) {
+            const questionCard = element.closest('.question-card');
+            const options = questionCard.querySelectorAll('.option');
+            const feedback = questionCard.querySelector('.feedback');
+            
+            // التحقق من أن السؤال لم يتم الإجابة عليه مسبقاً
+            if (questionCard.dataset.answered === 'true') {
+                return;
+            }
+            
+            // إزالة التحديد من جميع الخيارات في نفس السؤال
+            options.forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // تحديد الخيار المختار
+            element.classList.add('selected');
+            
+            // حفظ الإجابة الصحيحة في البيانات
+            questionCard.dataset.correctAnswer = isCorrect;
+            questionCard.dataset.selectedOption = Array.from(options).indexOf(element);
+            
+            // منع النقر مرة أخرى
+            options.forEach(option => {
+                option.style.pointerEvents = 'none';
+            });
+            
+            // إظهار تأكيد الاختيار فقط
+            feedback.textContent = 'تم حفظ إجابتك ✓';
+            feedback.className = 'feedback';
+            feedback.style.display = 'block';
+            feedback.style.background = '#e3f2fd';
+            feedback.style.color = '#1976d2';
+            feedback.style.border = '1px solid #bbdefb';
+            
+            questionCard.dataset.answered = 'true';
+            
+            // تحديث النقاط
+            if (isCorrect) {
+                score++;
+            } else {
+                wrongAnswers++;
+            }
+            totalQuestions++;
+            
+            // تحديث النقاط
+            document.getElementById('score').textContent = `${score}/${totalQuestions}`;
+            
+            // تحديث النتائج النهائية
+            updateFinalResults();
+            
+            // التحقق من إنهاء جميع الأسئلة
+            checkIfAllQuestionsComplete();
+        }
+        
 
-            // حفظ التقدم
-            saveProgress() {
-                const progress = {
-                    studentName: this.state.studentName,
-                    studentClass: this.state.studentClass,
-                    score: this.state.score,
-                    totalQuestions: this.state.totalQuestions,
-                    wrongAnswers: this.state.wrongAnswers,
-                    answeredQuestions: Array.from(this.state.answeredQuestions),
-                    currentPage: this.getCurrentPageIndex()
-                };
-                localStorage.setItem('quizProgress', JSON.stringify(progress));
-            },
-
-            // تحميل التقدم
-            loadProgress() {
-                const savedProgress = localStorage.getItem('quizProgress');
-                if (savedProgress) {
-                    const progress = JSON.parse(savedProgress);
-                    
-                    if (progress.studentName && progress.studentClass) {
-                        // تعبئة نموذج التسجيل تلقائياً
-                        document.getElementById('studentName').value = progress.studentName;
-                        document.getElementById('studentClass').value = progress.studentClass;
-                        
-                        if (confirm('تم العثور على تقدم سابق. هل تريد الاستمرار من حيث توقفت؟')) {
-                            this.state.studentName = progress.studentName;
-                            this.state.studentClass = progress.studentClass;
-                            this.state.score = progress.score || 0;
-                            this.state.totalQuestions = progress.totalQuestions || 0;
-                            this.state.wrongAnswers = progress.wrongAnswers || 0;
-                            this.state.answeredQuestions = new Set(progress.answeredQuestions || []);
-                            
-                            this.elements.loginScreen.style.display = 'none';
-                            this.elements.quizContent.style.display = 'block';
-                            this.elements.scoreDisplay.style.display = 'block';
-                            this.elements.progressIndicator.style.display = 'block';
-
-                            this.elements.displayStudentName.textContent = this.state.studentName;
-                            this.elements.displayStudentClass.textContent = this.state.studentClass;
-                            this.elements.score.textContent = `${this.state.score}/${this.state.totalQuestions}`;
-                            
-                            this.showPage(progress.currentPage || 0);
-                            this.restoreAnsweredQuestions();
-                            this.updateProgress();
-                        }
-                    }
-                }
-            },
-
-            // استعادة الإجابات المحفوظة
-            restoreAnsweredQuestions() {
-                this.state.answeredQuestions.forEach(questionId => {
-                    const [pageIndex, questionIndex] = questionId.split('-').map(str => parseInt(str.replace(/\D/g, '')));
-                    const page = document.getElementById(`page${pageIndex}`);
-                    if (page) {
-                        const questionCards = page.querySelectorAll('.question-card');
-                        if (questionCards[questionIndex]) {
-                            questionCards[questionIndex].dataset.answered = 'true';
-                            const options = questionCards[questionIndex].querySelectorAll('.option');
-                            options.forEach(opt => {
-                                opt.style.pointerEvents = 'none';
-                            });
-                        }
+        
+        function checkIfAllQuestionsComplete() {
+            // التحقق من إنهاء جميع الأسئلة في كل الأقسام
+            const allQuestions = document.querySelectorAll('.question-card');
+            const answeredQuestions = document.querySelectorAll('.question-card[data-answered="true"]');
+            
+            // إذا تم الإجابة على جميع الأسئلة
+            if (allQuestions.length === answeredQuestions.length && allQuestions.length > 0) {
+                setTimeout(() => {
+                    showFinalResultsPage();
+                }, 1000);
+            }
+        }
+        
+        function showAllCorrectAnswersFromResults() {
+            // إخفاء صفحة النتائج وإظهار الأسئلة مع الإجابات
+            document.getElementById('finalResultsPage').style.display = 'none';
+            document.getElementById('quizContent').style.display = 'block';
+            
+            // إظهار الإجابات الصحيحة
+            revealAllAnswers();
+            
+            // إظهار رسالة تأكيد
+            const confirmDiv = document.createElement('div');
+            confirmDiv.innerHTML = `
+                <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #28a745; color: white; padding: 20px 30px; border-radius: 10px; z-index: 10000; text-align: center; font-weight: bold; box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+                    📋 تم عرض جميع الإجابات الصحيحة! يمكنك الآن مراجعة إجاباتك في جميع الأقسام
+                </div>
+            `;
+            document.body.appendChild(confirmDiv);
+            setTimeout(() => confirmDiv.remove(), 4000);
+        }
+        
+        function restartQuiz() {
+            // إعادة تعيين جميع المتغيرات
+            score = 0;
+            totalQuestions = 0;
+            wrongAnswers = 0;
+            
+            // إعادة تعيين جميع الأسئلة
+            const allQuestionCards = document.querySelectorAll('.question-card');
+            allQuestionCards.forEach(questionCard => {
+                questionCard.dataset.answered = 'false';
+                questionCard.removeAttribute('data-correct-answer');
+                questionCard.removeAttribute('data-selected-option');
+                
+                const options = questionCard.querySelectorAll('.option');
+                options.forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                    option.style.pointerEvents = 'auto';
+                });
+                
+                const feedback = questionCard.querySelector('.feedback');
+                feedback.style.display = 'none';
+            });
+            
+            // إخفاء صفحة النتائج وإظهار واجهة التسجيل
+            document.getElementById('finalResultsPage').style.display = 'none';
+            document.getElementById('quizContent').style.display = 'none';
+            document.getElementById('scoreDisplay').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'flex';
+            
+            // إعادة تعيين النموذج
+            document.getElementById('studentForm').reset();
+        }
+        
+        function revealAllAnswers() {
+            // إظهار الإجابات الصحيحة في جميع الأقسام
+            const allQuestionCards = document.querySelectorAll('.question-card[data-answered="true"]');
+            
+            allQuestionCards.forEach(questionCard => {
+                const options = questionCard.querySelectorAll('.option');
+                const feedback = questionCard.querySelector('.feedback');
+                const isCorrect = questionCard.dataset.correctAnswer === 'true';
+                const selectedIndex = parseInt(questionCard.dataset.selectedOption);
+                
+                // تلوين الخيارات
+                options.forEach((option, index) => {
+                    const optionIsCorrect = option.onclick.toString().includes('true');
+                    if (optionIsCorrect) {
+                        option.classList.add('correct');
+                    } else if (index === selectedIndex && !isCorrect) {
+                        option.classList.add('incorrect');
                     }
                 });
-            },
-
-            // الحصول على رقم الصفحة الحالية
-            getCurrentPageIndex() {
-                const activePage = document.querySelector('.page-section.active');
-                if (activePage) {
-                    return parseInt(activePage.id.replace('page', ''));
+                
+                // تحديث التغذية الراجعة
+                if (isCorrect) {
+                    feedback.textContent = '✅ إجابة صحيحة! أحسنت';
+                    feedback.className = 'feedback correct';
+                } else {
+                    feedback.textContent = '❌ إجابة خاطئة. الإجابة الصحيحة مميزة باللون الأخضر';
+                    feedback.className = 'feedback incorrect';
                 }
-                return 0;
-            },
-
-            // مسح التقدم المحفوظ
-            clearProgress() {
-                localStorage.removeItem('quizProgress');
+            });
+        }
+        
+        function showWhatsAppForm() {
+            document.getElementById('whatsappModal').style.display = 'flex';
+        }
+        
+        function closeWhatsAppModal() {
+            document.getElementById('whatsappModal').style.display = 'none';
+            document.getElementById('teacherWhatsApp').value = '';
+        }
+        
+        function sendWhatsAppMessage() {
+            const teacherNumber = document.getElementById('teacherWhatsApp').value.trim();
+            
+            if (!teacherNumber) {
+                showNotification('يرجى إدخال رقم الواتساب', '#dc3545');
+                return;
             }
-        };
+            
+            // التحقق من صحة الرقم (أرقام فقط)
+            if (!/^\d+$/.test(teacherNumber)) {
+                showNotification('يرجى إدخال رقم صحيح (أرقام فقط)', '#dc3545');
+                return;
+            }
+            
+            // حساب النسبة المئوية
+            const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+            
+            // تحديد مستوى الأداء
+            let performanceLevel = '';
+            if (percentage >= 90) {
+                performanceLevel = 'ممتاز 🌟';
+            } else if (percentage >= 80) {
+                performanceLevel = 'جيد جداً 👏';
+            } else if (percentage >= 70) {
+                performanceLevel = 'جيد 👍';
+            } else if (percentage >= 60) {
+                performanceLevel = 'مقبول 📚';
+            } else {
+                performanceLevel = 'يحتاج تحسين 💪';
+            }
+            
+            // إنشاء رسالة النتائج
+            const message = `📊 نتائج الطالب في أسئلة السلطان قابوس
+            
+👤 اسم الطالب: ${studentName}
+🏫 الشعبة: ${studentClass}
 
-        // بدء التطبيق عند تحميل الصفحة
-        document.addEventListener('DOMContentLoaded', () => {
-            QuizApp.init();
-        });
+📈 النتائج:
+✅ الإجابات الصحيحة: ${score}
+❌ الإجابات الخاطئة: ${wrongAnswers}
+📝 إجمالي الأسئلة: ${totalQuestions}
+🎯 النسبة المئوية: ${percentage}%
+
+📊 التقييم: ${performanceLevel}
+
+تم إنجاز الاختبار بتاريخ: ${new Date().toLocaleDateString('ar-SA')}`;
+            
+            // ترميز الرسالة للواتساب
+            const encodedMessage = encodeURIComponent(message);
+            
+            // إنشاء رابط الواتساب
+            const whatsappUrl = `https://wa.me/${teacherNumber}?text=${encodedMessage}`;
+            
+            // فتح الواتساب في نافذة جديدة
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+            
+            // إغلاق النموذج وإظهار رسالة تأكيد
+            closeWhatsAppModal();
+            showNotification('تم فتح الواتساب لإرسال النتيجة للمعلم!', '#25D366');
+        }
+        
+        function sendResultsByEmail() {
+            // حساب النسبة المئوية
+            const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+            
+            // تحديد مستوى الأداء
+            let performanceLevel = '';
+            if (percentage >= 90) {
+                performanceLevel = 'ممتاز 🌟';
+            } else if (percentage >= 80) {
+                performanceLevel = 'جيد جداً 👏';
+            } else if (percentage >= 70) {
+                performanceLevel = 'جيد 👍';
+            } else if (percentage >= 60) {
+                performanceLevel = 'مقبول 📚';
+            } else {
+                performanceLevel = 'يحتاج تحسين 💪';
+            }
+            
+            // البريد الإلكتروني الافتراضي
+            const teacherEmail = 'omk456456@gmail.com';
+            
+            // موضوع الرسالة
+            const subject = `نتائج الطالب ${studentName} - أسئلة السلطان قابوس`;
+            
+            // محتوى الرسالة
+            const body = `نتائج الطالب في أسئلة السلطان قابوس
+
+اسم الطالب: ${studentName}
+الشعبة: ${studentClass}
+
+النتائج:
+الإجابات الصحيحة: ${score}
+الإجابات الخاطئة: ${wrongAnswers}
+إجمالي الأسئلة: ${totalQuestions}
+النسبة المئوية: ${percentage}%
+
+التقييم: ${performanceLevel}
+
+تم إنجاز الاختبار بتاريخ: ${new Date().toLocaleDateString('ar-SA')}
+
+مع تحيات نظام الأسئلة التفاعلية`;
+            
+            // إنشاء رابط البريد الإلكتروني
+            const mailtoUrl = `mailto:${teacherEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // فتح تطبيق البريد الإلكتروني
+            window.open(mailtoUrl, '_blank', 'noopener,noreferrer');
+            
+            // إظهار رسالة تأكيد
+            showNotification('تم فتح تطبيق البريد الإلكتروني لإرسال النتيجة!', '#EA4335');
+        }
+        
+        function showNotification(message, color) {
+            const notificationDiv = document.createElement('div');
+            notificationDiv.innerHTML = `
+                <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: ${color}; color: white; padding: 20px 30px; border-radius: 10px; z-index: 10000; text-align: center; font-weight: bold; box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+                    ${message}
+                </div>
+            `;
+            document.body.appendChild(notificationDiv);
+            setTimeout(() => notificationDiv.remove(), 3000);
+        }
+        
+        // تهيئة النظام عند تحميل الصفحة
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98fa6ba2c430f9ee',t:'MTc2MDY0Nzc0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
