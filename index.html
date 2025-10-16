@@ -338,6 +338,68 @@
             margin-bottom: 20px;
         }
         
+        .results-table-container {
+            margin: 30px 0;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1.1rem;
+        }
+        
+        .results-table thead {
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
+        }
+        
+        .results-table th {
+            padding: 20px 15px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.2rem;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .results-table td {
+            padding: 18px 15px;
+            text-align: center;
+            color: white;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-weight: 500;
+        }
+        
+        .results-table tbody tr {
+            transition: all 0.3s ease;
+        }
+        
+        .results-table tbody tr:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .correct-row {
+            background: rgba(40, 167, 69, 0.2);
+        }
+        
+        .incorrect-row {
+            background: rgba(220, 53, 69, 0.2);
+        }
+        
+        .total-row {
+            background: rgba(102, 126, 234, 0.2);
+        }
+        
+        .score-row {
+            background: rgba(255, 193, 7, 0.2);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
         .results-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -750,6 +812,69 @@
                     <div class="feedback"></div>
                 </div>
                 
+                <div class="section-title">أسئلة إضافية - الفهم والتحليل</div>
+                <div class="question-card">
+                    <div class="question">في أي مدينة ولد السلطان قابوس؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">أ) مسقط</div>
+                        <div class="option" onclick="selectOption(this, true)">ب) صلالة</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) نزوى</div>
+                        <div class="option" onclick="selectOption(this, false)">د) صور</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">من هو مؤسس الدولة الأولى لأسرة البوسعيد؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">أ) الإمام أحمد بن سعيد</div>
+                        <div class="option" onclick="selectOption(this, false)">ب) السلطان سعيد بن تيمور</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) السلطان قابوس بن سعيد</div>
+                        <div class="option" onclick="selectOption(this, false)">د) الإمام سلطان بن سيف</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">في أي عام أرسل السلطان سعيد بن تيمور ابنه قابوس إلى إنجلترا؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">أ) ١٩٥٦م</div>
+                        <div class="option" onclick="selectOption(this, false)">ب) ١٩٥٧م</div>
+                        <div class="option" onclick="selectOption(this, true)">ج) ١٩٥٨م</div>
+                        <div class="option" onclick="selectOption(this, false)">د) ١٩٥٩م</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">ما اسم المدرسة التي درس فيها السلطان قابوس في المراحل الابتدائية؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">أ) المدرسة السعيدية</div>
+                        <div class="option" onclick="selectOption(this, false)">ب) مدرسة سافوك</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) أكاديمية سانت هيرست</div>
+                        <div class="option" onclick="selectOption(this, false)">د) المدرسة الملكية</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">السلطان قابوس من سلالة الإمام أحمد بن سعيد. (صح/خطأ)</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">صح</div>
+                        <div class="option" onclick="selectOption(this, false)">خطأ</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">درس السلطان قابوس في مدرسة سافوك لمدة ثلاث سنوات. (صح/خطأ)</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">صح</div>
+                        <div class="option" onclick="selectOption(this, true)">خطأ</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
                 <!-- أزرار التنقل -->
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
                     <div></div>
@@ -829,6 +954,78 @@
                 
                 <div class="question-card">
                     <div class="question">تولى السلطان قابوس الحكم في عام ١٩٧٠م. (صح/خطأ)</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">صح</div>
+                        <div class="option" onclick="selectOption(this, false)">خطأ</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="section-title">أسئلة إضافية - الفهم والتحليل</div>
+                <div class="question-card">
+                    <div class="question">كم سنة قضى السلطان قابوس في صلالة بعد عودته من رحلته حول العالم؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">أ) خمس سنوات</div>
+                        <div class="option" onclick="selectOption(this, true)">ب) ست سنوات</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) سبع سنوات</div>
+                        <div class="option" onclick="selectOption(this, false)">د) ثماني سنوات</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">في أي تاريخ تولى السلطان قابوس الحكم؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">أ) ٢٠ يوليو ١٩٧٠م</div>
+                        <div class="option" onclick="selectOption(this, false)">ب) ٢٢ يوليو ١٩٧٠م</div>
+                        <div class="option" onclick="selectOption(this, true)">ج) ٢٣ يوليو ١٩٧٠م</div>
+                        <div class="option" onclick="selectOption(this, false)">د) ٢٥ يوليو ١٩٧٠م</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">ما الذي درسه السلطان قابوس لمدة عام بعد الأكاديمية العسكرية؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">أ) الطب</div>
+                        <div class="option" onclick="selectOption(this, true)">ب) نظم الحكم المحلي</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) الهندسة</div>
+                        <div class="option" onclick="selectOption(this, false)">د) القانون</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">ما الذي ساعد السلطان قابوس على توسيع مداركه حسب قوله؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">أ) السفر فقط</div>
+                        <div class="option" onclick="selectOption(this, false)">ب) التعليم الغربي فقط</div>
+                        <div class="option" onclick="selectOption(this, true)">ج) التعليم العظيم الذي تلقاه</div>
+                        <div class="option" onclick="selectOption(this, false)">د) الحياة العسكرية فقط</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">عاد السلطان قابوس من رحلته حول العالم عام ١٩٦٤م. (صح/خطأ)</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">صح</div>
+                        <div class="option" onclick="selectOption(this, false)">خطأ</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">اهتم السلطان قابوس بالمعاصرة مع الحفاظ على الهوية العمانية. (صح/خطأ)</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">صح</div>
+                        <div class="option" onclick="selectOption(this, false)">خطأ</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">درس السلطان قابوس دورات تخصصية في شؤون الإدارة وتنظيم الدول. (صح/خطأ)</div>
                     <div class="options">
                         <div class="option" onclick="selectOption(this, true)">صح</div>
                         <div class="option" onclick="selectOption(this, false)">خطأ</div>
@@ -935,6 +1132,89 @@
                     <div class="feedback"></div>
                 </div>
                 
+                <div class="section-title">أسئلة إضافية - الفهم والتحليل</div>
+                <div class="question-card">
+                    <div class="question">ما اسم الجائزة السنوية التي أطلقها السلطان قابوس؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">أ) جائزة السلطان قابوس للعلوم</div>
+                        <div class="option" onclick="selectOption(this, true)">ب) جائزة السلطان قابوس لخدمات البيئة</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) جائزة السلطان قابوس للتعليم</div>
+                        <div class="option" onclick="selectOption(this, false)">د) جائزة السلطان قابوس للثقافة</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">كم كان عمر السلطان قابوس عندما وُضع على ظهر حصان؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">أ) ثلاث سنوات</div>
+                        <div class="option" onclick="selectOption(this, true)">ب) أربع سنوات</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) خمس سنوات</div>
+                        <div class="option" onclick="selectOption(this, false)">د) ست سنوات</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">من خلال أي منظمة تُقدم جائزة السلطان قابوس لخدمات البيئة؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">أ) اليونسكو</div>
+                        <div class="option" onclick="selectOption(this, false)">ب) اليونيسف</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) منظمة الصحة العالمية</div>
+                        <div class="option" onclick="selectOption(this, false)">د) الأمم المتحدة</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">أي من هذه الهوايات لم تُذكر للسلطان قابوس؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">أ) الموسيقى</div>
+                        <div class="option" onclick="selectOption(this, false)">ب) التصوير</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) مراقبة الكواكب</div>
+                        <div class="option" onclick="selectOption(this, true)">د) الشطرنج</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">ما اسم موسوعة السلطان قابوس المذكورة في النص؟</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">أ) موسوعة السلطان قابوس للأسماء العربية</div>
+                        <div class="option" onclick="selectOption(this, false)">ب) موسوعة السلطان قابوس للتاريخ</div>
+                        <div class="option" onclick="selectOption(this, false)">ج) موسوعة السلطان قابوس للجغرافيا</div>
+                        <div class="option" onclick="selectOption(this, false)">د) موسوعة السلطان قابوس للعلوم</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">كان للسلطان قابوس مكتبة كبيرة يقضي فيها وقتاً في القراءة. (صح/خطأ)</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">صح</div>
+                        <div class="option" onclick="selectOption(this, false)">خطأ</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">تُقدم جائزة السلطان قابوس لخدمات البيئة كل ثلاث سنوات. (صح/خطأ)</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, false)">صح</div>
+                        <div class="option" onclick="selectOption(this, true)">خطأ</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question">كان السلطان قابوس يحب المشي على شاطئ البحر للتفكير في شؤون الدولة. (صح/خطأ)</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, true)">صح</div>
+                        <div class="option" onclick="selectOption(this, false)">خطأ</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
                 <!-- أزرار التنقل -->
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
                     <button onclick="showPage(1)" class="nav-button" style="background: linear-gradient(135deg, #6c757d 0%, #495057 100%); color: white; border: none; padding: 15px 25px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px;">
@@ -1001,21 +1281,38 @@
                 <div class="percentage-inner" id="finalPercentageText">0%</div>
             </div>
             
-            <div class="results-grid">
-                <div class="result-card">
-                    <div class="result-number" id="finalCorrectAnswers">0</div>
-                    <div class="result-label">إجابات صحيحة</div>
-                </div>
-                
-                <div class="result-card">
-                    <div class="result-number" id="finalWrongAnswers">0</div>
-                    <div class="result-label">إجابات خاطئة</div>
-                </div>
-                
-                <div class="result-card">
-                    <div class="result-number" id="finalTotalAnswered">0</div>
-                    <div class="result-label">إجمالي الأسئلة</div>
-                </div>
+            <div class="results-table-container">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>البيان</th>
+                            <th>العدد</th>
+                            <th>النسبة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="correct-row">
+                            <td>✅ الإجابات الصحيحة</td>
+                            <td id="finalCorrectAnswers">0</td>
+                            <td id="correctPercentage">0%</td>
+                        </tr>
+                        <tr class="incorrect-row">
+                            <td>❌ الإجابات الخاطئة</td>
+                            <td id="finalWrongAnswers">0</td>
+                            <td id="incorrectPercentage">0%</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td>📊 إجمالي الأسئلة</td>
+                            <td id="finalTotalAnswered">0</td>
+                            <td>100%</td>
+                        </tr>
+                        <tr class="score-row">
+                            <td>🎯 النتيجة النهائية</td>
+                            <td id="finalScoreDisplay">0/0</td>
+                            <td id="finalPercentageDisplay">0%</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             
             <div class="performance-message" id="finalPerformanceMessage">
@@ -1136,10 +1433,19 @@
             percentageCircle.style.setProperty('--percentage', `${percentage * 3.6}deg`);
             percentageText.textContent = `${percentage}%`;
             
-            // تحديث الأرقام
+            // تحديث الأرقام في الجدول
             document.getElementById('finalCorrectAnswers').textContent = score;
             document.getElementById('finalWrongAnswers').textContent = wrongAnswers;
             document.getElementById('finalTotalAnswered').textContent = totalQuestions;
+            document.getElementById('finalScoreDisplay').textContent = `${score}/${totalQuestions}`;
+            document.getElementById('finalPercentageDisplay').textContent = `${percentage}%`;
+            
+            // حساب النسب المئوية للإجابات
+            const correctPercentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+            const incorrectPercentage = totalQuestions > 0 ? Math.round((wrongAnswers / totalQuestions) * 100) : 0;
+            
+            document.getElementById('correctPercentage').textContent = `${correctPercentage}%`;
+            document.getElementById('incorrectPercentage').textContent = `${incorrectPercentage}%`;
             
             // تحديث بيانات الطالب في النتائج
             document.getElementById('finalResultStudentName').textContent = studentName;
@@ -1358,7 +1664,7 @@
 
 التقييم: ${performanceLevel}
 
-تم إنجاز الاختبار بتاريخ: ${new Date().toLocaleDateString('ar-SA')}
+تم إنجاز الاختبار بتاريخ: ${new Date().toLocaleDateString('en-GB')}
 
 مع تحيات نظام الأسئلة التفاعلية`;
             
@@ -1385,5 +1691,5 @@
         
         // تهيئة النظام عند تحميل الصفحة
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98fa7f8ef6d6f9ee',t:'MTc2MDY0ODU1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98fa8b6dd6e0f9ee',t:'MTc2MDY0OTA0NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
