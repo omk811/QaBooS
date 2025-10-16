@@ -8,60 +8,139 @@
         body {
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-attachment: fixed;
             margin: 0;
             padding: 20px;
             min-height: 100vh;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="10" cy="60" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="90" cy="40" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+            z-index: -1;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.2);
             overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.3);
         }
         
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 30px;
+            padding: 40px 30px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: float 20s linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
         
         .header h1 {
-            margin: 0;
-            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+            font-size: 2.8rem;
             font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin: 0;
+            position: relative;
+            z-index: 1;
         }
         
         .tabs {
             display: flex;
-            background: #f8f9fa;
-            border-bottom: 2px solid #e9ecef;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-bottom: 3px solid rgba(102, 126, 234, 0.2);
+            position: relative;
+        }
+        
+        .tabs::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 33.33%;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 3px 3px 0 0;
         }
         
         .tab {
             flex: 1;
-            padding: 20px;
+            padding: 25px 20px;
             text-align: center;
-            background: #f8f9fa;
+            background: transparent;
             border: none;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: bold;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             color: #495057;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .tab.active {
-            background: #007bff;
-            color: white;
+            background: transparent;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+        
+        .tab.active::before {
+            left: 0;
         }
         
         .tab:hover:not(.active) {
-            background: #e9ecef;
+            background: rgba(102, 126, 234, 0.05);
+            color: #667eea;
+            transform: translateY(-1px);
         }
         
         .content {
@@ -98,18 +177,38 @@
         }
         
         .question-card {
-            background: white;
-            border: 2px solid #e9ecef;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,249,250,0.9) 100%);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(102, 126, 234, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08), 0 0 0 1px rgba(255,255,255,0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .question-card:hover {
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12), 0 0 0 1px rgba(102, 126, 234, 0.2);
+            transform: translateY(-5px);
+            border-color: rgba(102, 126, 234, 0.2);
+        }
+        
+        .question-card:hover::before {
+            transform: scaleX(1);
         }
         
         .question {
@@ -125,35 +224,63 @@
         }
         
         .option {
-            padding: 12px 16px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
+            padding: 18px 20px;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: #f8f9fa;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, rgba(248,249,250,0.8) 0%, rgba(255,255,255,0.8) 100%);
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .option:hover {
-            border-color: #007bff;
-            background: #e3f2fd;
+            border-color: #667eea;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+        
+        .option:hover::before {
+            left: 0;
         }
         
         .option.selected {
-            border-color: #007bff;
-            background: #007bff;
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
         }
         
         .option.correct {
             border-color: #28a745;
-            background: #28a745;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
             color: white;
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
         }
         
         .option.incorrect {
             border-color: #dc3545;
-            background: #dc3545;
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
             color: white;
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(220, 53, 69, 0.3);
         }
         
         .feedback {
@@ -308,12 +435,26 @@
         }
         
         .login-form {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.3);
+            max-width: 550px;
             width: 100%;
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
         
         .login-form h2 {
@@ -338,19 +479,23 @@
         .form-group input,
         .form-group select {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
+            padding: 18px 20px;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-sizing: border-box;
+            background: rgba(248, 249, 250, 0.5);
+            backdrop-filter: blur(5px);
         }
         
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #007bff;
-            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1), 0 5px 15px rgba(102, 126, 234, 0.2);
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-2px);
         }
         
         .start-btn {
@@ -358,18 +503,35 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 18px;
-            border-radius: 12px;
-            font-size: 1.2rem;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.3rem;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .start-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .start-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(102,174,234,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .start-btn:hover::before {
+            left: 0;
         }
         
         .nav-button {
@@ -864,10 +1026,6 @@
                 <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; margin-bottom: 20px;">
                     <h3 style="margin-bottom: 15px; color: white;">📤 إرسال النتيجة للمعلم</h3>
                     
-                    <button onclick="showWhatsAppForm()" style="background: #25D366; color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin: 10px; display: inline-flex; align-items: center; gap: 8px;">
-                        📱 إرسال عبر الواتساب
-                    </button>
-                    
                     <button onclick="sendResultsByEmail()" style="background: #EA4335; color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin: 10px; display: inline-flex; align-items: center; gap: 8px;">
                         📧 إرسال عبر البريد الإلكتروني
                     </button>
@@ -881,27 +1039,7 @@
                 </button>
             </div>
             
-            <!-- نموذج إدخال رقم الواتساب -->
-            <div id="whatsappModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center;">
-                <div style="background: white; padding: 30px; border-radius: 15px; max-width: 400px; width: 90%; text-align: center;">
-                    <h3 style="color: #2c3e50; margin-bottom: 20px;">📱 إرسال النتيجة عبر الواتساب</h3>
-                    
-                    <div style="margin-bottom: 20px; text-align: right;">
-                        <label for="teacherWhatsApp" style="display: block; margin-bottom: 8px; color: #2c3e50; font-weight: bold;">رقم واتساب المعلم:</label>
-                        <input type="tel" id="teacherWhatsApp" placeholder="مثال: 96896547890" style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem; text-align: center; box-sizing: border-box;" dir="ltr">
-                        <small style="color: #6c757d; display: block; margin-top: 5px;">أدخل الرقم مع رمز الدولة (بدون +)</small>
-                    </div>
-                    
-                    <div style="display: flex; gap: 10px; justify-content: center;">
-                        <button onclick="sendWhatsAppMessage()" style="background: #25D366; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">
-                            📱 إرسال
-                        </button>
-                        <button onclick="closeWhatsAppModal()" style="background: #6c757d; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">
-                            إلغاء
-                        </button>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </main>
     
@@ -965,6 +1103,16 @@
             const tabs = document.querySelectorAll('.tab');
             tabs.forEach(tab => tab.classList.remove('active'));
             tabs[pageIndex].classList.add('active');
+            
+            // تحديث موضع الخط السفلي للتبويب النشط
+            const tabsContainer = document.querySelector('.tabs');
+            if (tabsContainer && tabsContainer.querySelector('::before')) {
+                tabsContainer.style.setProperty('--active-tab', pageIndex);
+                const activeIndicator = tabsContainer.querySelector('::before');
+                if (activeIndicator) {
+                    activeIndicator.style.left = `${pageIndex * 33.33}%`;
+                }
+            }
         }
         
         function updateFinalResults() {
@@ -1170,75 +1318,7 @@
             });
         }
         
-        function showWhatsAppForm() {
-            document.getElementById('whatsappModal').style.display = 'flex';
-        }
-        
-        function closeWhatsAppModal() {
-            document.getElementById('whatsappModal').style.display = 'none';
-            document.getElementById('teacherWhatsApp').value = '';
-        }
-        
-        function sendWhatsAppMessage() {
-            const teacherNumber = document.getElementById('teacherWhatsApp').value.trim();
-            
-            if (!teacherNumber) {
-                showNotification('يرجى إدخال رقم الواتساب', '#dc3545');
-                return;
-            }
-            
-            // التحقق من صحة الرقم (أرقام فقط)
-            if (!/^\d+$/.test(teacherNumber)) {
-                showNotification('يرجى إدخال رقم صحيح (أرقام فقط)', '#dc3545');
-                return;
-            }
-            
-            // حساب النسبة المئوية
-            const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
-            
-            // تحديد مستوى الأداء
-            let performanceLevel = '';
-            if (percentage >= 90) {
-                performanceLevel = 'ممتاز 🌟';
-            } else if (percentage >= 80) {
-                performanceLevel = 'جيد جداً 👏';
-            } else if (percentage >= 70) {
-                performanceLevel = 'جيد 👍';
-            } else if (percentage >= 60) {
-                performanceLevel = 'مقبول 📚';
-            } else {
-                performanceLevel = 'يحتاج تحسين 💪';
-            }
-            
-            // إنشاء رسالة النتائج
-            const message = `📊 نتائج الطالب في أسئلة السلطان قابوس
-            
-👤 اسم الطالب: ${studentName}
-🏫 الشعبة: ${studentClass}
 
-📈 النتائج:
-✅ الإجابات الصحيحة: ${score}
-❌ الإجابات الخاطئة: ${wrongAnswers}
-📝 إجمالي الأسئلة: ${totalQuestions}
-🎯 النسبة المئوية: ${percentage}%
-
-📊 التقييم: ${performanceLevel}
-
-تم إنجاز الاختبار بتاريخ: ${new Date().toLocaleDateString('ar-SA')}`;
-            
-            // ترميز الرسالة للواتساب
-            const encodedMessage = encodeURIComponent(message);
-            
-            // إنشاء رابط الواتساب
-            const whatsappUrl = `https://wa.me/${teacherNumber}?text=${encodedMessage}`;
-            
-            // فتح الواتساب في نافذة جديدة
-            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-            
-            // إغلاق النموذج وإظهار رسالة تأكيد
-            closeWhatsAppModal();
-            showNotification('تم فتح الواتساب لإرسال النتيجة للمعلم!', '#25D366');
-        }
         
         function sendResultsByEmail() {
             // حساب النسبة المئوية
@@ -1305,5 +1385,5 @@
         
         // تهيئة النظام عند تحميل الصفحة
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98fa6ba2c430f9ee',t:'MTc2MDY0Nzc0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98fa7f8ef6d6f9ee',t:'MTc2MDY0ODU1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
