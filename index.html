@@ -2,17 +2,11 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>أسئلة تفاعلية - شخصية السلطان قابوس</title>
     <style>
-        /* Reset CSS */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 25%, #667eea 50%, #764ba2 75%, #f093fb 100%);
             background-attachment: fixed;
@@ -314,18 +308,6 @@
             border: 1px solid #f5c6cb;
         }
         
-        /* تنسيق موحد للأرقام */
-        .score-display, .result-number, .percentage-inner, 
-        #score, #finalScoreDisplay, .results-table td {
-            font-family: Arial, sans-serif !important;
-            direction: ltr !important;
-            text-align: center !important;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-            font-feature-settings: "tnum";
-            font-variant-numeric: tabular-nums;
-        }
-        
         .score-display {
             position: fixed;
             top: 20px;
@@ -337,8 +319,6 @@
             font-weight: bold;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             z-index: 1000;
-            min-width: 120px;
-            text-align: center;
         }
         
         .final-results-page {
@@ -571,9 +551,17 @@
             font-size: 1.1rem;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-sizing: border-box;
-            background: rgba(42, 82, 152, 0.6);
-            backdrop-filter: blur(5px);
-            color: #ffffff;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+        
+        .form-group input::placeholder {
+            color: #666;
+        }
+        
+        .form-group select option {
+            color: #333;
+            background: white;
         }
         
         .form-group input:focus,
@@ -581,7 +569,7 @@
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1), 0 5px 15px rgba(102, 126, 234, 0.2);
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 1);
             transform: translateY(-2px);
         }
         
@@ -686,16 +674,36 @@
                 left: 0;
                 margin-bottom: 20px;
                 text-align: center;
-                width: 100%;
-                border-radius: 0;
             }
             
-            .login-form {
-                padding: 30px 20px;
+            .results-table {
+                font-size: 0.9rem;
             }
             
-            .content {
-                padding: 15px;
+            .results-table th,
+            .results-table td {
+                padding: 12px 8px;
+                word-wrap: break-word;
+            }
+            
+            .percentage-circle {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .percentage-inner {
+                width: 75px;
+                height: 75px;
+                font-size: 1.2rem;
+            }
+            
+            .final-results-page {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .results-title {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -1255,52 +1263,17 @@
                     <button onclick="showPage(1)" class="nav-button" style="background: linear-gradient(135deg, #6c757d 0%, #495057 100%); color: white; border: none; padding: 15px 25px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px;">
                         → الصفحة السابقة (44)
                     </button>
-                    <button onclick="checkIfAllQuestionsComplete()" class="nav-button" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); color: white; border: none; padding: 15px 25px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px;">
-                        🏁 إنهاء الاختبار
-                    </button>
+                    <div style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); color: white; padding: 15px 25px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; display: flex; align-items: center; gap: 8px;">
+                        🏁 الصفحة الأخيرة
+                    </div>
                 </div>
             </section>
         </div>
         
-            <!-- صندوق النتائج النهائية -->
-            <div class="final-results" id="finalResults">
-                <div class="results-title">📊 نتائج <span id="resultStudentName"></span></div>
-                
-                <div class="student-result-info">
-                    <p><strong>الطالب:</strong> <span id="resultStudentNameFull"></span></p>
-                    <p><strong>الصف:</strong> <span id="resultStudentClass"></span></p>
-                </div>
-                
-                <div class="percentage-circle" id="percentageCircle">
-                    <div class="percentage-inner" id="percentageText">0%</div>
-                </div>
-                
-                <div class="results-grid">
-                    <div class="result-card">
-                        <div class="result-number" id="correctAnswers">0</div>
-                        <div class="result-label">إجابات صحيحة</div>
-                    </div>
-                    
-                    <div class="result-card">
-                        <div class="result-number" id="wrongAnswers">0</div>
-                        <div class="result-label">إجابات خاطئة</div>
-                    </div>
-                    
-                    <div class="result-card">
-                        <div class="result-number" id="totalAnswered">0</div>
-                        <div class="result-label">إجمالي الأسئلة المجابة</div>
-                    </div>
-                </div>
-                
-                <div class="performance-message" id="performanceMessage">
-                    ابدأ في حل الأسئلة لترى نتائجك هنا!
-                </div>
-            </div>
-            
-            <!-- اسم المعد -->
-            <div class="author-name">
-                إعداد الأستاذ خليل البلوشي
-            </div>
+        <!-- اسم المعد -->
+        <div class="author-name">
+            إعداد الأستاذ خليل البلوشي
+        </div>
         </div>
         
         <!-- صفحة النتائج الختامية -->
@@ -1361,6 +1334,10 @@
                     <button onclick="sendResultsByEmail()" style="background: #EA4335; color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin: 10px; display: inline-flex; align-items: center; gap: 8px;">
                         📧 إرسال عبر البريد الإلكتروني
                     </button>
+                    
+                    <button onclick="copyResultsForNoor()" style="background: #00A651; color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin: 10px; display: inline-flex; align-items: center; gap: 8px;">
+                        📋 نسخ النتيجة لمنصة نور
+                    </button>
                 </div>
                 
                 <button onclick="showAllCorrectAnswersFromResults()" style="background: #007bff; color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin: 10px;">
@@ -1374,36 +1351,12 @@
     </main>
     
     <script>
-        // المتغيرات العامة
         let score = 0;
         let totalQuestions = 0;
         let wrongAnswers = 0;
         let studentName = '';
         let studentClass = '';
-        let answeredQuestions = new Set();
-
-        // دالة لتهيئة التطبيق
-        function initializeApp() {
-            console.log('التطبيق جاهز للاستخدام');
-            updateScoreDisplay();
-        }
-
-        // دالة محسنة لتنسيق الأرقام
-        function formatNumber(num) {
-            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-
-        // دالة محسنة لتحديث عرض النقاط
-        function updateScoreDisplay() {
-            const scoreElement = document.getElementById('score');
-            if (scoreElement) {
-                scoreElement.textContent = `${formatNumber(score)}/${formatNumber(totalQuestions)}`;
-                scoreElement.style.direction = 'ltr';
-                scoreElement.style.textAlign = 'center';
-            }
-        }
-
-        // دالة بدء الاختبار
+        
         function startQuiz(event) {
             event.preventDefault();
             
@@ -1412,7 +1365,23 @@
             studentClass = document.getElementById('studentClass').value;
             
             if (!studentName || !studentClass) {
-                showNotification('يرجى إدخال جميع البيانات المطلوبة', '#dc3545');
+                // إنشاء رسالة تنبيه مخصصة
+                const alertDiv = document.createElement('div');
+                alertDiv.textContent = 'يرجى إدخال جميع البيانات المطلوبة';
+                alertDiv.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: #dc3545;
+                    color: white;
+                    padding: 15px 25px;
+                    border-radius: 8px;
+                    z-index: 10000;
+                    font-weight: bold;
+                `;
+                document.body.appendChild(alertDiv);
+                setTimeout(() => alertDiv.remove(), 3000);
                 return;
             }
             
@@ -1427,11 +1396,8 @@
             
             // تحديث النتائج النهائية
             updateFinalResults();
-            
-            showNotification(`مرحباً ${studentName}! ابدأ بالإجابة على الأسئلة`, '#28a745');
         }
-
-        // دالة عرض الصفحات
+        
         function showPage(pageIndex) {
             // إخفاء جميع الصفحات
             const pages = document.querySelectorAll('.page-section');
@@ -1446,100 +1412,20 @@
             tabs[pageIndex].classList.add('active');
             
             // تحديث موضع الخط السفلي للتبويب النشط
-            updateTabIndicator(pageIndex);
-        }
-
-        // دالة تحديث مؤشر التبويب
-        function updateTabIndicator(pageIndex) {
             const tabsContainer = document.querySelector('.tabs');
-            if (tabsContainer) {
-                const percentage = (pageIndex / 2) * 100;
-                tabsContainer.style.setProperty('--active-tab-position', `${percentage}%`);
+            if (tabsContainer && tabsContainer.querySelector('::before')) {
+                tabsContainer.style.setProperty('--active-tab', pageIndex);
+                const activeIndicator = tabsContainer.querySelector('::before');
+                if (activeIndicator) {
+                    activeIndicator.style.left = `${pageIndex * 33.33}%`;
+                }
             }
         }
-
-        // دالة اختيار الإجابة
-        function selectOption(element, isCorrect) {
-            const questionCard = element.closest('.question-card');
-            const questionId = Array.from(questionCard.parentNode.children).indexOf(questionCard);
-            const fullQuestionId = `${Array.from(questionCard.closest('.page-section').parentNode.children).indexOf(questionCard.closest('.page-section'))}-${questionId}`;
-
-            // التحقق من أن السؤال لم يتم الإجابة عليه مسبقاً
-            if (answeredQuestions.has(fullQuestionId)) {
-                return;
-            }
-
-            const options = questionCard.querySelectorAll('.option');
-            const feedback = questionCard.querySelector('.feedback');
-            
-            // إزالة التحديد من جميع الخيارات في نفس السؤال
-            options.forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            
-            // تحديد الخيار المختار
-            element.classList.add('selected');
-            
-            // حفظ الإجابة الصحيحة في البيانات
-            questionCard.dataset.correctAnswer = isCorrect;
-            questionCard.dataset.selectedOption = Array.from(options).indexOf(element);
-            
-            // منع النقر مرة أخرى
-            options.forEach(option => {
-                option.style.pointerEvents = 'none';
-            });
-            
-            // إظهار تأكيد الاختيار فقط
-            feedback.textContent = 'تم حفظ إجابتك ✓';
-            feedback.className = 'feedback';
-            feedback.style.display = 'block';
-            feedback.style.background = '#e3f2fd';
-            feedback.style.color = '#1976d2';
-            feedback.style.border = '1px solid #bbdefb';
-            
-            questionCard.dataset.answered = 'true';
-            answeredQuestions.add(fullQuestionId);
-            
-            // تحديث النقاط
-            if (isCorrect) {
-                score++;
-            } else {
-                wrongAnswers++;
-            }
-            totalQuestions++;
-            
-            // تحديث النقاط
-            updateScoreDisplay();
-            
-            // تحديث النتائج النهائية
-            updateFinalResults();
-        }
-
-        // دالة تحديث النتائج النهائية
+        
         function updateFinalResults() {
-            // هذه الوظيفة تحفظ البيانات فقط
-            console.log(`النتيجة: ${score}/${totalQuestions}`);
+            // هذه الوظيفة لم تعد تحدث النتائج المرئية، فقط تحفظ البيانات
         }
-
-        // دالة التحقق من اكتمال جميع الأسئلة
-        function checkIfAllQuestionsComplete() {
-            const allQuestions = document.querySelectorAll('.question-card');
-            const totalQuestionsCount = allQuestions.length;
-            const answeredCount = answeredQuestions.size;
-
-            if (answeredCount < totalQuestionsCount) {
-                const unanswered = totalQuestionsCount - answeredCount;
-                showNotification(`يوجد ${unanswered} أسئلة لم يتم الإجابة عليها بعد`, '#ffc107');
-                return;
-            }
-
-            // إذا تم الإجابة على جميع الأسئلة
-            if (totalQuestionsCount > 0 && answeredCount === totalQuestionsCount) {
-                showFinalResultsPage();
-            }
-        }
-
-        // دالة عرض صفحة النتائج النهائية
+        
         function showFinalResultsPage() {
             // إخفاء محتوى الأسئلة
             document.getElementById('quizContent').style.display = 'none';
@@ -1548,7 +1434,28 @@
             // إظهار صفحة النتائج الختامية
             document.getElementById('finalResultsPage').style.display = 'block';
             
-            // حساب النسبة المئوية
+            // التأكد من صحة الحسابات
+            const actualTotalQuestions = document.querySelectorAll('.question-card').length;
+            const actualAnsweredQuestions = document.querySelectorAll('.question-card[data-answered="true"]').length;
+            
+            // إعادة حساب النتائج بدقة
+            let correctCount = 0;
+            let incorrectCount = 0;
+            
+            document.querySelectorAll('.question-card[data-answered="true"]').forEach(questionCard => {
+                if (questionCard.dataset.correctAnswer === 'true') {
+                    correctCount++;
+                } else {
+                    incorrectCount++;
+                }
+            });
+            
+            // تحديث المتغيرات العامة
+            score = correctCount;
+            wrongAnswers = incorrectCount;
+            totalQuestions = actualAnsweredQuestions;
+            
+            // حساب النسبة المئوية بدقة
             const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
             
             // تحديث النسبة المئوية في الدائرة
@@ -1557,14 +1464,14 @@
             percentageCircle.style.setProperty('--percentage', `${percentage * 3.6}deg`);
             percentageText.textContent = `${percentage}%`;
             
-            // تحديث الأرقام في الجدول
-            document.getElementById('finalCorrectAnswers').textContent = formatNumber(score);
-            document.getElementById('finalWrongAnswers').textContent = formatNumber(wrongAnswers);
-            document.getElementById('finalTotalAnswered').textContent = formatNumber(totalQuestions);
-            document.getElementById('finalScoreDisplay').textContent = `${formatNumber(score)}/${formatNumber(totalQuestions)}`;
+            // تحديث الأرقام في الجدول بالقيم الصحيحة
+            document.getElementById('finalCorrectAnswers').textContent = score.toString();
+            document.getElementById('finalWrongAnswers').textContent = wrongAnswers.toString();
+            document.getElementById('finalTotalAnswered').textContent = totalQuestions.toString();
+            document.getElementById('finalScoreDisplay').textContent = `${score}/${totalQuestions}`;
             document.getElementById('finalPercentageDisplay').textContent = `${percentage}%`;
             
-            // حساب النسب المئوية للإجابات
+            // حساب النسب المئوية للإجابات بدقة
             const correctPercentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
             const incorrectPercentage = totalQuestions > 0 ? Math.round((wrongAnswers / totalQuestions) * 100) : 0;
             
@@ -1576,11 +1483,6 @@
             document.getElementById('finalResultStudentClass').textContent = studentClass;
             
             // تحديث رسالة الأداء
-            updatePerformanceMessage(percentage);
-        }
-
-        // دالة تحديث رسالة الأداء
-        function updatePerformanceMessage(percentage) {
             const performanceMessage = document.getElementById('finalPerformanceMessage');
             const firstName = studentName.split(' ')[0];
             
@@ -1600,9 +1502,84 @@
                 performanceMessage.textContent = `💪 لا تستسلم ${firstName}! راجع المادة وحاول مرة أخرى!`;
                 performanceMessage.style.background = 'rgba(220, 53, 69, 0.3)';
             }
+            
+            // طباعة النتائج في وحدة التحكم للتأكد من الدقة
+            console.log('النتائج النهائية:', {
+                'الإجابات الصحيحة': score,
+                'الإجابات الخاطئة': wrongAnswers,
+                'إجمالي الأسئلة': totalQuestions,
+                'النسبة المئوية': percentage + '%'
+            });
         }
-
-        // دالة عرض الإجابات الصحيحة
+        
+        function selectOption(element, isCorrect) {
+            const questionCard = element.closest('.question-card');
+            const options = questionCard.querySelectorAll('.option');
+            const feedback = questionCard.querySelector('.feedback');
+            
+            // التحقق من أن السؤال لم يتم الإجابة عليه مسبقاً
+            if (questionCard.dataset.answered === 'true') {
+                return;
+            }
+            
+            // إزالة التحديد من جميع الخيارات في نفس السؤال
+            options.forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // تحديد الخيار المختار
+            element.classList.add('selected');
+            
+            // حفظ الإجابة الصحيحة في البيانات
+            questionCard.dataset.correctAnswer = isCorrect.toString();
+            questionCard.dataset.selectedOption = Array.from(options).indexOf(element).toString();
+            
+            // منع النقر مرة أخرى
+            options.forEach(option => {
+                option.style.pointerEvents = 'none';
+            });
+            
+            // إظهار تأكيد الاختيار فقط
+            feedback.textContent = 'تم حفظ إجابتك ✓';
+            feedback.className = 'feedback';
+            feedback.style.display = 'block';
+            feedback.style.background = '#e3f2fd';
+            feedback.style.color = '#1976d2';
+            feedback.style.border = '1px solid #bbdefb';
+            
+            questionCard.dataset.answered = 'true';
+            
+            // تحديث النقاط بدقة
+            if (isCorrect) {
+                score++;
+            } else {
+                wrongAnswers++;
+            }
+            totalQuestions++;
+            
+            // تحديث عرض النقاط مع التأكد من الأرقام الصحيحة
+            const scoreElement = document.getElementById('score');
+            if (scoreElement) {
+                scoreElement.textContent = score + '/' + totalQuestions;
+            }
+            
+            // التحقق من إنهاء جميع الأسئلة
+            checkIfAllQuestionsComplete();
+        }
+        
+        function checkIfAllQuestionsComplete() {
+            // التحقق من إنهاء جميع الأسئلة في كل الأقسام
+            const allQuestions = document.querySelectorAll('.question-card');
+            const answeredQuestions = document.querySelectorAll('.question-card[data-answered="true"]');
+            
+            // إذا تم الإجابة على جميع الأسئلة
+            if (allQuestions.length === answeredQuestions.length && allQuestions.length > 0) {
+                setTimeout(() => {
+                    showFinalResultsPage();
+                }, 1000);
+            }
+        }
+        
         function showAllCorrectAnswersFromResults() {
             // إخفاء صفحة النتائج وإظهار الأسئلة مع الإجابات
             document.getElementById('finalResultsPage').style.display = 'none';
@@ -1611,53 +1588,22 @@
             // إظهار الإجابات الصحيحة
             revealAllAnswers();
             
-            showNotification('تم عرض جميع الإجابات الصحيحة! يمكنك الآن مراجعة إجاباتك', '#28a745');
+            // إظهار رسالة تأكيد
+            const confirmDiv = document.createElement('div');
+            confirmDiv.innerHTML = `
+                <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #28a745; color: white; padding: 20px 30px; border-radius: 10px; z-index: 10000; text-align: center; font-weight: bold; box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+                    📋 تم عرض جميع الإجابات الصحيحة! يمكنك الآن مراجعة إجاباتك في جميع الأقسام
+                </div>
+            `;
+            document.body.appendChild(confirmDiv);
+            setTimeout(() => confirmDiv.remove(), 4000);
         }
-
-        // دالة كشف الإجابات الصحيحة
-        function revealAllAnswers() {
-            const allQuestionCards = document.querySelectorAll('.question-card');
-            
-            allQuestionCards.forEach(questionCard => {
-                const options = questionCard.querySelectorAll('.option');
-                const feedback = questionCard.querySelector('.feedback');
-                
-                // تلوين الخيارات الصحيحة
-                options.forEach(option => {
-                    const optionIsCorrect = option.onclick && option.onclick.toString().includes('true');
-                    if (optionIsCorrect) {
-                        option.classList.add('correct');
-                    }
-                });
-                
-                // إذا كانت هناك إجابة مختارة، تلوينها
-                if (questionCard.dataset.answered === 'true') {
-                    const selectedIndex = parseInt(questionCard.dataset.selectedOption);
-                    const isCorrect = questionCard.dataset.correctAnswer === 'true';
-                    
-                    if (!isCorrect) {
-                        options[selectedIndex].classList.add('incorrect');
-                    }
-                    
-                    // تحديث التغذية الراجعة
-                    if (isCorrect) {
-                        feedback.textContent = '✅ إجابة صحيحة! أحسنت';
-                        feedback.className = 'feedback correct';
-                    } else {
-                        feedback.textContent = '❌ إجابة خاطئة. الإجابة الصحيحة مميزة باللون الأخضر';
-                        feedback.className = 'feedback incorrect';
-                    }
-                }
-            });
-        }
-
-        // دالة إعادة بدء الاختبار
+        
         function restartQuiz() {
             // إعادة تعيين جميع المتغيرات
             score = 0;
             totalQuestions = 0;
             wrongAnswers = 0;
-            answeredQuestions.clear();
             
             // إعادة تعيين جميع الأسئلة
             const allQuestionCards = document.querySelectorAll('.question-card');
@@ -1674,7 +1620,6 @@
                 
                 const feedback = questionCard.querySelector('.feedback');
                 feedback.style.display = 'none';
-                feedback.className = 'feedback';
             });
             
             // إخفاء صفحة النتائج وإظهار واجهة التسجيل
@@ -1685,24 +1630,64 @@
             
             // إعادة تعيين النموذج
             document.getElementById('studentForm').reset();
-            
-            showNotification('تم إعادة تعيين الاختبار بنجاح', '#28a745');
         }
-
-        // دالة إرسال النتائج بالبريد الإلكتروني
+        
+        function revealAllAnswers() {
+            // إظهار الإجابات الصحيحة في جميع الأقسام
+            const allQuestionCards = document.querySelectorAll('.question-card[data-answered="true"]');
+            
+            allQuestionCards.forEach(questionCard => {
+                const options = questionCard.querySelectorAll('.option');
+                const feedback = questionCard.querySelector('.feedback');
+                const isCorrect = questionCard.dataset.correctAnswer === 'true';
+                const selectedIndex = parseInt(questionCard.dataset.selectedOption);
+                
+                // تلوين الخيارات
+                options.forEach((option, index) => {
+                    const optionIsCorrect = option.onclick.toString().includes('true');
+                    if (optionIsCorrect) {
+                        option.classList.add('correct');
+                    } else if (index === selectedIndex && !isCorrect) {
+                        option.classList.add('incorrect');
+                    }
+                });
+                
+                // تحديث التغذية الراجعة
+                if (isCorrect) {
+                    feedback.textContent = '✅ إجابة صحيحة! أحسنت';
+                    feedback.className = 'feedback correct';
+                } else {
+                    feedback.textContent = '❌ إجابة خاطئة. الإجابة الصحيحة مميزة باللون الأخضر';
+                    feedback.className = 'feedback incorrect';
+                }
+            });
+        }
+        
         function sendResultsByEmail() {
+            // حساب النسبة المئوية
             const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
             
             // تحديد مستوى الأداء
             let performanceLevel = '';
-            if (percentage >= 90) performanceLevel = 'ممتاز 🌟';
-            else if (percentage >= 80) performanceLevel = 'جيد جداً 👏';
-            else if (percentage >= 70) performanceLevel = 'جيد 👍';
-            else if (percentage >= 60) performanceLevel = 'مقبول 📚';
-            else performanceLevel = 'يحتاج تحسين 💪';
+            if (percentage >= 90) {
+                performanceLevel = 'ممتاز 🌟';
+            } else if (percentage >= 80) {
+                performanceLevel = 'جيد جداً 👏';
+            } else if (percentage >= 70) {
+                performanceLevel = 'جيد 👍';
+            } else if (percentage >= 60) {
+                performanceLevel = 'مقبول 📚';
+            } else {
+                performanceLevel = 'يحتاج تحسين 💪';
+            }
             
+            // البريد الإلكتروني الافتراضي
             const teacherEmail = 'omk456456@gmail.com';
+            
+            // موضوع الرسالة
             const subject = `نتائج الطالب ${studentName} - أسئلة السلطان قابوس`;
+            
+            // محتوى الرسالة
             const body = `نتائج الطالب في أسئلة السلطان قابوس
 
 اسم الطالب: ${studentName}
@@ -1716,17 +1701,120 @@
 
 التقييم: ${performanceLevel}
 
-تم إنجاز الاختبار بتاريخ: ${new Date().toLocaleDateString('ar-OM')}
+تم إنجاز الاختبار بتاريخ: ${new Date().toLocaleDateString('en-GB')}
 
 مع تحيات نظام الأسئلة التفاعلية`;
             
+            // إنشاء رابط البريد الإلكتروني
             const mailtoUrl = `mailto:${teacherEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            window.open(mailtoUrl, '_blank');
             
+            // فتح تطبيق البريد الإلكتروني
+            window.open(mailtoUrl, '_blank', 'noopener,noreferrer');
+            
+            // إظهار رسالة تأكيد
             showNotification('تم فتح تطبيق البريد الإلكتروني لإرسال النتيجة!', '#EA4335');
         }
-
-        // دالة عرض الإشعارات
+        
+        function copyResultsForNoor() {
+            try {
+                // حساب النسبة المئوية
+                const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+                
+                // تحديد مستوى الأداء والدرجة
+                let performanceLevel = '';
+                let grade = '';
+                if (percentage >= 90) {
+                    performanceLevel = 'ممتاز';
+                    grade = 'أ+';
+                } else if (percentage >= 85) {
+                    performanceLevel = 'ممتاز';
+                    grade = 'أ';
+                } else if (percentage >= 80) {
+                    performanceLevel = 'جيد جداً';
+                    grade = 'ب+';
+                } else if (percentage >= 75) {
+                    performanceLevel = 'جيد جداً';
+                    grade = 'ب';
+                } else if (percentage >= 70) {
+                    performanceLevel = 'جيد';
+                    grade = 'ج+';
+                } else if (percentage >= 65) {
+                    performanceLevel = 'جيد';
+                    grade = 'ج';
+                } else if (percentage >= 60) {
+                    performanceLevel = 'مقبول';
+                    grade = 'د+';
+                } else if (percentage >= 50) {
+                    performanceLevel = 'مقبول';
+                    grade = 'د';
+                } else {
+                    performanceLevel = 'راسب';
+                    grade = 'هـ';
+                }
+                
+                // تنسيق النتيجة لمنصة نور
+                const noorResult = 'نتيجة الطالب في أسئلة السلطان قابوس - طيب الله ثراه\n\n' +
+                    'اسم الطالب: ' + studentName + '\n' +
+                    'الشعبة: ' + studentClass + '\n' +
+                    'تاريخ الاختبار: ' + new Date().toLocaleDateString('ar-SA') + '\n\n' +
+                    'النتائج التفصيلية:\n' +
+                    'الإجابات الصحيحة: ' + score + ' سؤال\n' +
+                    'الإجابات الخاطئة: ' + wrongAnswers + ' سؤال\n' +
+                    'إجمالي الأسئلة: ' + totalQuestions + ' سؤال\n' +
+                    'النسبة المئوية: ' + percentage + '%\n' +
+                    'التقدير: ' + performanceLevel + '\n' +
+                    'الدرجة: ' + grade + '\n\n' +
+                    'المحتوى المُقيَّم:\n' +
+                    '• صفحة 43: ولادة السلطان قابوس ونشأته وتعليمه المبكر\n' +
+                    '• صفحة 44: مراحل تعليمه المتقدمة وتوليه الحكم\n' +
+                    '• صفحة 45: هواياته ومشاريعه ووفاته\n\n' +
+                    'ملاحظات:\n' +
+                    '- تم تقييم فهم الطالب للنص وقدرته على استخراج المعلومات\n' +
+                    '- شمل التقييم أسئلة المعجم والفهم والتحليل\n' +
+                    '- الاختبار يغطي المنهج المقرر في مادة اللغة العربية\n\n' +
+                    'إعداد: الأستاذ خليل البلوشي\n' +
+                    'النظام: أسئلة تفاعلية - شخصية السلطان قابوس';
+                
+                // محاولة النسخ إلى الحافظة
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(noorResult).then(function() {
+                        showNotification('تم نسخ النتيجة بنجاح! يمكنك الآن لصقها في منصة نور', '#00A651');
+                    }).catch(function() {
+                        fallbackCopy(noorResult);
+                    });
+                } else {
+                    fallbackCopy(noorResult);
+                }
+            } catch (error) {
+                showNotification('حدث خطأ في نسخ النتيجة. يرجى المحاولة مرة أخرى', '#dc3545');
+            }
+        }
+        
+        function fallbackCopy(text) {
+            // إنشاء عنصر نص مؤقت
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showNotification('تم نسخ النتيجة بنجاح! يمكنك الآن لصقها في منصة نور', '#00A651');
+                } else {
+                    showNotification('لم يتم نسخ النتيجة. يرجى نسخها يدوياً', '#dc3545');
+                }
+            } catch (err) {
+                showNotification('لم يتم نسخ النتيجة. يرجى نسخها يدوياً', '#dc3545');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+        
         function showNotification(message, color) {
             const notificationDiv = document.createElement('div');
             notificationDiv.innerHTML = `
@@ -1735,33 +1823,8 @@
                 </div>
             `;
             document.body.appendChild(notificationDiv);
-            setTimeout(() => {
-                if (notificationDiv.parentNode) {
-                    notificationDiv.parentNode.removeChild(notificationDiv);
-                }
-            }, 3000);
+            setTimeout(() => notificationDiv.remove(), 3000);
         }
-
-        // تهيئة التطبيق عند تحميل الصفحة
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeApp();
-            
-            // إضافة CSS لمؤشر التبويب
-            const style = document.createElement('style');
-            style.textContent = `
-                .tabs::before {
-                    left: var(--active-tab-position, 0%) !important;
-                }
-            `;
-            document.head.appendChild(style);
-        });
-
-        // منع إعادة تحميل الصفحة عند الضغط على Enter في النموذج
-        document.getElementById('studentForm').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-            }
-        });
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98faec5f8493f9ee',t:'MTc2MDY1MzAxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
